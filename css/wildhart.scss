@@ -3,6 +3,7 @@
 
 @import "position";
 @import "flexbox";
+@import "icomoon";
 
 
 
@@ -15,6 +16,22 @@ $description-bg-color: hsl(263, 91%, 71%);
 $music-bg-color: hsl(59, 86%, 56%);
 
 
+
+@mixin only-icon {
+	overflow: hidden;
+	white-space: nowrap;
+
+	&:before {
+		display: inline-block;
+		margin-right: .75em;
+		text-align: center;
+		width: 100%;
+	}
+}
+
+.only-icon {
+	@include only-icon;
+}
 
 @mixin gradient-bg ($from-color, $to-color: null, $range: 5em) {
 	@if ($to-color == null) {
@@ -64,7 +81,6 @@ header {
 		background-color: $bg-color;
 		height: $nav-height;
 		overflow: hidden;
-		padding: 1em 20%;
 		@include position(none none 0 none);
 		width: 100%;
 	}
@@ -145,12 +161,43 @@ header {
 .nav-links {
 	@include flexbox-container;
 
-	line-height: 3;
 	list-style: none;
 
 	> li {
 		@include flex(1);
 		text-align: center;
+
+		> a {
+			border-bottom: 0;
+			display: block;
+			font-size: 2.5em;
+			line-height: 5rem;
+
+			&.icon-youtube {
+				$youtube-color: hsl(358, 79%, 45%);
+				background-color: fade-out($youtube-color, .25);
+
+				&:hover, &:focus {
+					background-color: $youtube-color;
+				}
+			}
+			&.icon-soundcloud {
+				$soundcloud-color: hsl(28, 100%, 50%);
+				background-color: fade-out($soundcloud-color, .25);
+
+				&:hover, &:focus {
+					background-color: $soundcloud-color;
+				}
+			}
+			&.icon-facebook {
+				$facebook-color: hsl(221, 44%, 41%);
+				background-color: fade-out($facebook-color, .25);
+
+				&:hover, &:focus {
+					background-color: $facebook-color;
+				}
+			}
+		}
 	}
 }
 
