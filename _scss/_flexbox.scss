@@ -1,0 +1,64 @@
+// Mixin implementation for basic flexbox support across as many browsers as possible.
+// Using this as long as Compass's implementation doesn't match the latest spec.
+
+@mixin flexbox-container {
+	// 2009 syntax
+	display: -webkit-box;
+
+	// 2011 "tweener syntax"
+	display: -ms-flexbox;
+
+	// Ripe for implementation-2012 syntax
+	display: -webkit-flex;
+	display: flex;
+}
+
+@mixin flex ($flex) {
+	-webkit-box-flex: $flex;
+
+	-ms-flex: $flex;
+	-webkit-flex: $flex;
+	flex: $flex;
+}
+
+@mixin flex-direction ($direction) {
+
+	// For old syntax conversion
+	$box-direction: $direction;
+
+	@if $direction == column {
+		$box-direction: vertical;
+	} @else if $direction == row {
+		$box-direction: horizontal;
+	} @else if $direction == column-reverse {
+		$box-direction: vertical;
+		box-direction: reverse;
+	} @else if $direction == row-reverse {
+		$box-direction: horizontal;
+		box-direction: reverse;
+	}
+
+	-webkit-box-orient: $box-direction;
+
+	-ms-flex-direction: $direction;
+	-webkit-flex-direction: $direction;
+	flex-direction: $direction;
+}
+
+@mixin align-items ($alignment) {
+	-webkit-box-align: $alignment;
+
+	-ms-flex-align: $alignment;
+
+	-webkit-align-items: $alignment;
+	align-items: $alignment;
+}
+
+@mixin justify-content ($justification) {
+	-webkit-box-pack: $justification;
+
+	-ms-flex-pack: $justification;
+
+	-webkit-justify-content: $justification;
+	justify-content: $justification;
+}

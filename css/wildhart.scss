@@ -1,0 +1,133 @@
+---
+---
+
+@import "position";
+@import "flexbox";
+
+
+$color: white;
+$nav-height: 5em;
+
+$gradient-color: hsla(0, 0%, 10%, .5);
+$bg-color: hsl(350, 90%, 76%);
+$description-bg-color: hsl(263, 91%, 71%);
+$music-bg-color: hsl(59, 86%, 56%);
+
+
+
+@mixin gradient-bg ($from-color, $to-color: null, $range: 5em) {
+	@if ($to-color == null) {
+		$to-color: $from-color;
+		$from-color: darken($from-color, 5%);
+	}
+
+	background-image: linear-gradient(to bottom, $from-color, $to-color);
+}
+
+
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+a {
+	color: inherit;
+	border-bottom: 1px solid fade-out($color, .5);
+	text-decoration: none;
+}
+
+body, html {
+	height: 100%;
+}
+
+body {
+	background-color: $bg-color;
+	color: $color;
+	font: 16px/1.5 arial;
+}
+
+h1, h2, h3 {
+	font-family: lust-script;
+}
+
+header {
+	height: 100%;
+	overflow: hidden;
+	position: relative;
+
+	> .background {
+		background: {
+			// attachment: fixed;
+			image: linear-gradient(to top, $gradient-color, transparent 30%), url("/img/wildhart.large.jpg");
+			position: center bottom;
+			repeat: no-repeat;
+		}
+		height: 100%;
+		@include position(none none $nav-height none, relative);
+	}
+
+	> nav {
+		@include gradient-bg($bg-color);
+
+		background-color: $bg-color;
+		height: $nav-height;
+		overflow: hidden;
+		padding: 1em 20%;
+		@include position(none none 0 none);
+		width: 100%;
+	}
+}
+
+
+
+.description, .soundcloud {
+	> p {
+		margin: 0 auto 1em auto;
+		max-width: 20rem;
+		width: 90%;
+	}
+
+	> h2 {
+		font-size: 8em;
+		margin: 0 auto .5rem auto;
+		text-align: center;
+	}
+}
+
+.description {
+	@include gradient-bg($description-bg-color, $bg-color);
+	padding: 3em 0;
+}
+
+.soundcloud {
+	$gutter: 3em;
+
+	@include gradient-bg($bg-color, $music-bg-color);
+	padding: 0 $gutter;
+
+	> iframe {
+		display: block;
+		padding-bottom: $gutter;
+	}
+}
+
+.nav-heading {
+	display: none;
+	float: left;
+	height: 3rem;
+}
+
+.nav-links {
+	@include flexbox-container;
+
+	line-height: 3;
+	list-style: none;
+
+	> li {
+		@include flex(1);
+		text-align: center;
+	}
+}
+

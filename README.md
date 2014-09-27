@@ -1,4 +1,3 @@
-wildhart.se
-===========
+# wildhart.se
 
-Hemsida för Wildhart
+Hemsida för Wildhart. Byggd den med GitHub Pages.
