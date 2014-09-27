@@ -37,7 +37,7 @@ do ->
 
 
 
-header = document.querySelector "header > .background"
+header = document.querySelector ".background > .wildhart-image"
 lastPosition = 0
 
 parallaxBackground = =>
@@ -46,7 +46,7 @@ parallaxBackground = =>
 	unless lastPosition == scrollTop
 		lastPosition = scrollTop
 		bgPositionY = (scrollTop / 20)
-		header.style["transform"] = "translate3d(0, #{bgPositionY}%, 0)"
+		header.style["WebkitTransform"] = header.style["MozTransform"] = header.style["transform"] = "translate3d(0, -#{bgPositionY}%, 0)"
 
 	requestAnimationFrame parallaxBackground
 

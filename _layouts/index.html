@@ -3,31 +3,38 @@
 	{% include header.html %}
 
 	<body>
-		<header>
-			<div class="background"></div>
-			<nav>
-				<h1 class="nav-heading">Wildhart</h1>
-				<ul class="nav-links">
-					<li>YouTube</li>
-					<li>Soundcloud</li>
-					<li>Facebook</li>
-				</ul>
-			</nav>
-		</header>
-
-		<div class="description">
-			<h2>Om Wildhart</h2>
-			<p>Conveniently conceptualize technically sound functionalities via frictionless collaboration and idea-sharing. Continually actualize bleeding-edge materials after efficient products. Progressively scale cutting-edge innovation whereas clicks-and-mortar convergence. Distinctively.</p>
-			<p>Continually restore team building metrics without business resources. Phosfluorescently build collaborative deliverables with team building innovation. Conveniently evisculate best-of-breed vortals through distinctive models. Seamlessly cultivate.</p>
+		<div class="background">
+			<div class="wildhart-image"></div>
 		</div>
 
-		<div class="soundcloud">
-			<h2>Musik</h2>
-			{% for song in site.data.soundcloud %}
-				{{ song.iframe }}
-			{% endfor %}
-		</div>
+		<div class="foreground">
+			<header>
+				<nav>
+					<h1 class="nav-heading">Wildhart</h1>
+					<ul class="nav-links">
+						<li>YouTube</li>
+						<li>Soundcloud</li>
+						<li>Facebook</li>
+					</ul>
+				</nav>
+			</header>
 
-		{% include footer.html %}
+			<div class="description">
+				<h2>Om Wildhart</h2>
+				<p>Conveniently conceptualize technically sound functionalities via frictionless collaboration and idea-sharing. Continually actualize bleeding-edge materials after efficient products. Progressively scale cutting-edge innovation whereas clicks-and-mortar convergence. Distinctively.</p>
+				<p>Continually restore team building metrics without business resources. Phosfluorescently build collaborative deliverables with team building innovation. Conveniently evisculate best-of-breed vortals through distinctive models. Seamlessly cultivate.</p>
+			</div>
+
+			<div class="soundcloud">
+				<h2>Musik</h2>
+				<div class="iframes">
+					{% for song in site.data.soundcloud %}
+						{{ song.iframe }}
+					{% endfor %}
+				</div>
+			</div>
+
+			{% include footer.html %}
+		</div>
 	</body>
 </html>
