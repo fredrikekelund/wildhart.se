@@ -115,9 +115,10 @@ header {
 		height: 100%;
 		@include position(none none $nav-height none, relative);
 		transform: translateZ(0);
+		width: 100%;
 
 		@media screen and (max-width: $narrow) {
-			bottom: $nav-height / 1.75;
+			bottom: $nav-height / 1.8;
 		}
 	}
 }
@@ -187,11 +188,17 @@ header {
 	}
 }
 
-.description, .soundcloud {
+.description, .soundcloud, .images {
+	padding-top: 1em;
+
 	> p {
 		margin: 0 auto 1em auto;
 		max-width: 20rem;
 		width: 90%;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
 	}
 
 	> h2 {
@@ -234,10 +241,13 @@ header {
 	}
 
 	> .iframes {
-		@include flexbox-container;
 		flex-wrap: wrap;
 		@include justify-content(center);
 		width: 100%;
+
+		@media screen and (min-width: $narrow) {
+			@include flexbox-container;
+		}
 
 		> iframe {
 			display: block;
@@ -247,9 +257,14 @@ header {
 
 			@media screen and (max-width: $narrow) {
 				height: 300px;
-				min-width: 100%;
 				padding: $gutter / 6;
+				min-width: 0;
+				width: 100%;
 			}
 		}
 	}
+}
+
+.images {
+	@include gradient-bg($music-bg-color, transparent);
 }

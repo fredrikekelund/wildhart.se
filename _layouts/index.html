@@ -34,6 +34,15 @@
 				</div>
 			</div>
 
+			<div class="images">
+				<h2>Bilder</h2>
+				<div>
+					{% for image in site.data.images %}
+						<img src="{{ image.link }}" alt="{{ img.title }}">
+					{% endfor %}
+				</div>
+			</div>
+
 			{% include footer.html %}
 		</div>
 	</body>

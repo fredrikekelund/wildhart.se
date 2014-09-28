@@ -1,0 +1,4 @@
+# humanstxt.org
+# The humans responsible & technology colophon
+
+Designed and developed by Fredrik Ekelund - http://fredrik.computer
