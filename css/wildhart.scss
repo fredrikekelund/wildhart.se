@@ -127,8 +127,8 @@ header {
 
 		> .background {
 			background: {
-				position: center bottom;
 				repeat: no-repeat;
+				position: center center;
 				size: cover;
 			};
 			height: 100%;
@@ -137,6 +137,7 @@ header {
 
 	> .wildhart-image > .background {
 		background-image: linear-gradient(to top, $gradient-color, transparent 30%), url("/img/wildhart.large.jpg");
+		background-position: center bottom;
 		@include position(none none $nav-height none, relative);
 
 		@media screen and (max-width: $narrow) {
