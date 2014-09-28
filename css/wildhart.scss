@@ -12,12 +12,13 @@ $middle: 800px;
 $narrow: 600px;
 $narrower: 400px;
 
+$header-image-height: 100vh;
 $nav-height: 5em;
 
 $color: hsl(335, 86%, 26%);
 $social-links-color: white;
 // $heading-color: hsl(179, 84%, 90%);
-$heading-color: hsla(0, 0%, 100%, .9);
+$heading-color: white;
 $heading-text-shadow-colors: hsl(335, 86%, 26%), hsl(225, 86%, 56%), hsl(60, 100%, 50%);
 $heading-text-shadow-offsets: 0 2px, -1px -1px, -3px 3px;
 
@@ -44,13 +45,17 @@ $music-bg-color: hsl(59, 86%, 56%);
 	@include only-icon;
 }
 
-@mixin gradient-bg ($from-color, $to-color: null, $range: 5em) {
+@mixin gradient-bg ($from-color, $to-color: null, $range: null) {
 	@if ($to-color == null) {
 		$to-color: $from-color;
 		$from-color: darken($from-color, 5%);
 	}
 
-	background-image: linear-gradient(to bottom, $from-color, $to-color);
+	@if ($range != null) {
+		background-image: linear-gradient(to bottom, $from-color, $to-color $range);
+	} @else {
+		background-image: linear-gradient(to bottom, $from-color, $to-color);
+	}
 }
 
 
@@ -78,14 +83,18 @@ body {
 }
 
 h1, h2, h3 {
-	font-family: felt-tip-woman;
+	font-family: flood-std;
 	font-weight: normal;
 }
 
 header {
-	height: 100vh;
+	height: $header-image-height;
 	overflow: hidden;
 	position: relative;
+
+	@media screen and (max-height: $narrow) {
+		height: 350px;
+	}
 
 	> nav {
 		height: $nav-height;
@@ -101,25 +110,50 @@ header {
 
 
 
-.background {
-	height: 100vh;
+#background {
+	height: $header-image-height;
 	position: fixed;
 	width: 100%;
 
-	> .wildhart-image {
-		background: {
-			image: linear-gradient(to top, $gradient-color, transparent 30%), url("/img/wildhart.large.jpg");
-			position: center bottom;
-			repeat: no-repeat;
-			size: cover;
-		}
+	@media screen and (max-height: $narrow) {
+		height: 350px;
+	}
+
+	> div {
 		height: 100%;
-		@include position(none none $nav-height none, relative);
+		overflow: hidden;
 		transform: translateZ(0);
 		width: 100%;
 
+		> .background {
+			background: {
+				position: center bottom;
+				repeat: no-repeat;
+				size: cover;
+			};
+			height: 100%;
+		}
+	}
+
+	> .wildhart-image > .background {
+		background-image: linear-gradient(to top, $gradient-color, transparent 30%), url("/img/wildhart.large.jpg");
+		@include position(none none $nav-height none, relative);
+
 		@media screen and (max-width: $narrow) {
 			bottom: $nav-height / 1.8;
+		}
+	}
+
+	> .spacer {
+		height: 500px;
+	}
+
+	> .space-image {
+		height: 1120px;
+
+		> .background {
+			background-image: url("/img/rymden.jpg");
+			@include position(-13em none none none, relative);
 		}
 	}
 }
@@ -190,7 +224,10 @@ header {
 }
 
 .description, .soundcloud, .images {
-	padding-top: 1em;
+	$box-shadow-color: hsla(21, 80%, 60%, 0.3);
+
+	// box-shadow: -11em 0 0 $box-shadow-color inset, -8em 0 0 darken($box-shadow-color, 8%) inset, 11em 0 0 darken($box-shadow-color, 14%) inset, 13em 0 0 darken($box-shadow-color, 7%) inset;
+	padding-top: 2em !important;
 
 	> p {
 		margin: 0 auto 1em auto;
@@ -217,24 +254,28 @@ header {
 		text-shadow: $text-shadow;
 
 		@media screen and (max-width: $narrow) {
-			font-size: 5em;
+			font-size: 3.6em;
 		}
 	}
 }
 
 .description {
-	@include gradient-bg($description-bg-color, $bg-color);
+	@include gradient-bg($description-bg-color, $bg-color, 90%);
 	padding: 3em 0;
 
 	@media screen and (max-width: $narrow) {
 		padding: 0;
+	}
+
+	@media screen and (max-height: $narrow) {
+		padding-top: 4em;
 	}
 }
 
 .soundcloud {
 	$gutter: 3em;
 
-	@include gradient-bg($bg-color, $music-bg-color);
+	@include gradient-bg($bg-color, transparent, 80%);
 	padding: 0 $gutter / 2;
 
 	@media screen and (max-width: $narrow) {
@@ -267,5 +308,6 @@ header {
 }
 
 .images {
-	@include gradient-bg($music-bg-color, transparent);
+	@include gradient-bg($music-bg-color, $bg-color);
+	min-height: 25em;
 }

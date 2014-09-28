@@ -37,7 +37,13 @@ do ->
 
 
 
-header = document.querySelector ".background > .wildhart-image"
+parallaxes = [
+	document.querySelector "#background > .wildhart-image"
+	document.querySelector "#background > .space-image"
+]
+spacers = [
+	document.querySelector "#background > .spacer"
+]
 lastPosition = 0
 
 parallaxBackground = =>
@@ -45,8 +51,14 @@ parallaxBackground = =>
 
 	unless lastPosition == scrollTop
 		lastPosition = scrollTop
-		bgPositionY = (scrollTop / 20)
-		header.style["WebkitTransform"] = header.style["MozTransform"] = header.style["transform"] = "translate3d(0, -#{bgPositionY}%, 0)"
+		bgPositionY = scrollTop / 60
+
+		for spacer in spacers
+			spacer.style["WebkitTransform"] = spacer.style["MozTransform"] = spacer.style["transform"] = "translate3d(0, -#{scrollTop}px, 0)"
+
+		for parallax in parallaxes
+			parallax.style["WebkitTransform"] = parallax.style["MozTransform"] = parallax.style["transform"] = "translate3d(0, -#{scrollTop}px, 0)"
+			parallax.children[0].style["WebkitTransform"] = parallax.children[0].style["MozTransform"] = parallax.children[0].style["transform"] = "translate3d(0, #{bgPositionY}%, 0)"
 
 	requestAnimationFrame parallaxBackground
 
