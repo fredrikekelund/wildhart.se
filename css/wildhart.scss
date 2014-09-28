@@ -7,11 +7,21 @@
 
 
 
-$color: white;
+$wide: 1000px;
+$middle: 800px;
+$narrow: 600px;
+$narrower: 400px;
+
 $nav-height: 5em;
 
-$gradient-color: hsla(0, 0%, 10%, .5);
+$color: hsl(335, 86%, 26%);
+$social-links-color: white;
+$heading-color: hsl(179, 84%, 90%);
+$heading-text-shadow-colors: hsl(335, 86%, 26%), hsl(225, 86%, 56%), hsl(60, 100%, 50%);
+$heading-text-shadow-offsets: 0 2px, -1px -1px, -3px 3px;
+
 $bg-color: hsl(350, 90%, 76%);
+$gradient-color: hsla(0, 0%, 10%, .5);
 $description-bg-color: hsl(263, 91%, 71%);
 $music-bg-color: hsl(59, 86%, 56%);
 
@@ -63,11 +73,12 @@ body, html {
 body {
 	background-color: $bg-color;
 	color: $color;
-	font: 16px/1.5 arial;
+	font: 16px/1.5 myriad-pro, arial, sans-serif;
 }
 
 h1, h2, h3 {
-	font-family: lust-script;
+	font-family: felt-tip-woman;
+	font-weight: normal;
 }
 
 header {
@@ -76,13 +87,14 @@ header {
 	position: relative;
 
 	> nav {
-		@include gradient-bg($bg-color);
-
-		background-color: $bg-color;
 		height: $nav-height;
 		overflow: hidden;
 		@include position(none none 0 none);
 		width: 100%;
+
+		@media screen and (max-width: $narrow) {
+			height: $nav-height / 1.8;
+		}
 	}
 }
 
@@ -103,6 +115,10 @@ header {
 		height: 100%;
 		@include position(none none $nav-height none, relative);
 		transform: translateZ(0);
+
+		@media screen and (max-width: $narrow) {
+			bottom: $nav-height / 1.75;
+		}
 	}
 }
 
@@ -111,56 +127,16 @@ header {
 	z-index: 1;
 }
 
-.description, .soundcloud {
-	> p {
-		margin: 0 auto 1em auto;
-		max-width: 20rem;
-		width: 90%;
-	}
-
-	> h2 {
-		font-size: 8em;
-		margin: 0 auto .5rem auto;
-		text-align: center;
-	}
-}
-
-.description {
-	@include gradient-bg($description-bg-color, $bg-color);
-	padding: 3em 0;
-}
-
-.soundcloud {
-	$gutter: 3em;
-
-	@include gradient-bg($bg-color, $music-bg-color);
-	padding: 0 $gutter / 2;
-
-	> .iframes {
-		@include flexbox-container;
-		flex-wrap: wrap;
-		@include justify-content(center);
-		width: 100%;
-
-		> iframe {
-			display: block;
-			@include flex(1);
-			min-width: 400px;
-			padding: $gutter / 2;
-		}
-	}
-
-}
-
 .nav-heading {
 	display: none;
 	float: left;
 	height: 3rem;
 }
 
-.nav-links {
+.social-links {
 	@include flexbox-container;
 
+	color: $social-links-color;
 	list-style: none;
 
 	> li {
@@ -168,10 +144,20 @@ header {
 		text-align: center;
 
 		> a {
+			$font-size: 2.5em;
+
 			border-bottom: 0;
 			display: block;
-			font-size: 2.5em;
-			line-height: 5rem;
+			font-size: $font-size;
+			line-height: $nav-height / $font-size;
+			transition: background-color .2s linear;
+
+			@media screen and (max-width: $narrow) {
+				$smaller-font-size: 1.75;
+
+				font-size: unquote("#{$smaller-font-size}em");
+				line-height: ($nav-height / $smaller-font-size) / $smaller-font-size;
+			}
 
 			&.icon-youtube {
 				$youtube-color: hsl(358, 79%, 45%);
@@ -201,3 +187,69 @@ header {
 	}
 }
 
+.description, .soundcloud {
+	> p {
+		margin: 0 auto 1em auto;
+		max-width: 20rem;
+		width: 90%;
+	}
+
+	> h2 {
+		$text-shadow: unquote("#{nth($heading-text-shadow-offsets, 1)} 0 #{nth($heading-text-shadow-colors, 1)}");
+
+		@for $i from 2 to (length($heading-text-shadow-colors) + 1) {
+			$text-shadow: append($text-shadow, unquote("#{nth($heading-text-shadow-offsets, $i)} 0 #{nth($heading-text-shadow-colors, $i)}"), comma);
+		}
+
+		color: $heading-color;
+		font-size: 8em;
+		line-height: 1;
+		margin: 0 auto .5rem auto;
+		text-align: center;
+		text-shadow: $text-shadow;
+
+		@media screen and (max-width: $narrow) {
+			font-size: 5em;
+		}
+	}
+}
+
+.description {
+	@include gradient-bg($description-bg-color, $bg-color);
+	padding: 3em 0;
+
+	@media screen and (max-width: $narrow) {
+		padding: 0;
+	}
+}
+
+.soundcloud {
+	$gutter: 3em;
+
+	@include gradient-bg($bg-color, $music-bg-color);
+	padding: 0 $gutter / 2;
+
+	@media screen and (max-width: $narrow) {
+		padding: $gutter / 6;
+	}
+
+	> .iframes {
+		@include flexbox-container;
+		flex-wrap: wrap;
+		@include justify-content(center);
+		width: 100%;
+
+		> iframe {
+			display: block;
+			@include flex(1);
+			min-width: 400px;
+			padding: $gutter / 2;
+
+			@media screen and (max-width: $narrow) {
+				height: 300px;
+				min-width: 100%;
+				padding: $gutter / 6;
+			}
+		}
+	}
+}
