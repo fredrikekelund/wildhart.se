@@ -24,7 +24,7 @@ $heading-text-shadow-offsets: 0 2px, -1px -1px, -3px 3px;
 
 $bg-color: hsl(350, 90%, 76%);
 $gradient-color: hsla(0, 0%, 10%, .5);
-$description-bg-color: hsl(263, 91%, 71%);
+$description-bg-color: hsl(284, 84%, 61%);
 $music-bg-color: hsl(59, 86%, 56%);
 
 
@@ -146,6 +146,10 @@ header {
 
 	> .spacer {
 		height: 500px;
+
+		@media screen and (max-height: $narrow) {
+			height: 470px;
+		}
 	}
 
 	> .space-image {
@@ -153,7 +157,7 @@ header {
 
 		> .background {
 			background-image: url("/img/rymden.jpg");
-			@include position(-13em none none none, relative);
+			@include position(-15em none none none, relative);
 		}
 	}
 }
@@ -197,7 +201,7 @@ header {
 
 			&.icon-youtube {
 				$youtube-color: hsl(358, 79%, 45%);
-				background-color: fade-out($youtube-color, .25);
+				background-color: lighten($youtube-color, 5%);
 
 				&:hover, &:focus {
 					background-color: $youtube-color;
@@ -205,7 +209,7 @@ header {
 			}
 			&.icon-soundcloud {
 				$soundcloud-color: hsl(28, 100%, 50%);
-				background-color: fade-out($soundcloud-color, .25);
+				background-color: lighten($soundcloud-color, 5%);
 
 				&:hover, &:focus {
 					background-color: $soundcloud-color;
@@ -213,7 +217,7 @@ header {
 			}
 			&.icon-facebook {
 				$facebook-color: hsl(221, 44%, 41%);
-				background-color: fade-out($facebook-color, .25);
+				background-color: lighten($facebook-color, 5%);
 
 				&:hover, &:focus {
 					background-color: $facebook-color;
@@ -263,10 +267,6 @@ header {
 	@include gradient-bg($description-bg-color, $bg-color, 90%);
 	padding: 3em 0;
 
-	@media screen and (max-width: $narrow) {
-		padding: 0;
-	}
-
 	@media screen and (max-height: $narrow) {
 		padding-top: 4em;
 	}
@@ -275,10 +275,11 @@ header {
 .soundcloud {
 	$gutter: 3em;
 
-	@include gradient-bg($bg-color, transparent, 80%);
+	box-shadow: 0 0 0 10px fade-out($color, .5) inset;
 	padding: 0 $gutter / 2;
 
 	@media screen and (max-width: $narrow) {
+		box-shadow: 0 0 0 5px fade-out($color, .5) inset;
 		padding: $gutter / 6;
 	}
 
@@ -308,6 +309,6 @@ header {
 }
 
 .images {
-	@include gradient-bg($music-bg-color, $bg-color);
+	@include gradient-bg($bg-color, darken($bg-color, 10%));
 	min-height: 25em;
 }
