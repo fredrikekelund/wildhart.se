@@ -16,7 +16,8 @@ $nav-height: 5em;
 
 $color: hsl(335, 86%, 26%);
 $social-links-color: white;
-$heading-color: hsl(179, 84%, 90%);
+// $heading-color: hsl(179, 84%, 90%);
+$heading-color: hsla(0, 0%, 100%, .9);
 $heading-text-shadow-colors: hsl(335, 86%, 26%), hsl(225, 86%, 56%), hsl(60, 100%, 50%);
 $heading-text-shadow-offsets: 0 2px, -1px -1px, -3px 3px;
 
@@ -101,7 +102,7 @@ header {
 
 
 .background {
-	height: 100%;
+	height: 100vh;
 	position: fixed;
 	width: 100%;
 
