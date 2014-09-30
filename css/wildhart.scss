@@ -13,19 +13,22 @@ $narrow: 600px;
 $narrower: 400px;
 
 $header-image-height: 100vh;
-$nav-height: 5em;
+$nav-height: 4em;
+$border-width: 2px;
 
-$color: hsl(335, 86%, 26%);
+$color: white;
+$border-color: hsl(335, 86%, 26%);
 $social-links-color: white;
-// $heading-color: hsl(179, 84%, 90%);
 $heading-color: white;
 $heading-text-shadow-colors: hsl(335, 86%, 26%), hsl(225, 86%, 56%), hsl(60, 100%, 50%);
 $heading-text-shadow-offsets: 0 2px, -1px -1px, -3px 3px;
 
-$bg-color: hsl(350, 90%, 76%);
+$bg-color: hsl(338, 78%, 57%);
 $gradient-color: hsla(0, 0%, 10%, .5);
 $description-bg-color: hsl(284, 84%, 61%);
-$music-bg-color: hsl(59, 86%, 56%);
+$images-bg-color: hsl(59, 86%, 56%);
+
+$transition-duration: .35s;
 
 
 
@@ -87,85 +90,40 @@ h1, h2, h3 {
 	font-weight: normal;
 }
 
-header {
-	height: $header-image-height;
+section {
+	background: {
+		image: linear-gradient(to top, $gradient-color, transparent 30%), url("/img/wildhart.large.jpg");
+		position: center center;
+		repeat: no-repeat;
+		size: cover;
+	};
+	height: 100%;
 	overflow: hidden;
 	position: relative;
-
-	@media screen and (max-height: $narrow) {
-		height: 350px;
-	}
-
-	> nav {
-		height: $nav-height;
-		overflow: hidden;
-		@include position(none none 0 none);
-		width: 100%;
-
-		@media screen and (max-width: $narrow) {
-			height: $nav-height / 1.8;
-		}
-	}
-}
-
-
-
-#background {
-	height: $header-image-height;
-	position: fixed;
 	width: 100%;
 
 	@media screen and (max-height: $narrow) {
 		height: 350px;
 	}
 
-	> div {
-		height: 100%;
-		overflow: hidden;
-		transform: translateZ(0);
+	@media screen and (max-width: $narrow) {
+		bottom: $nav-height / 1.8;
+	}
+
+	> header {
+		@include position(0 none none none);
 		width: 100%;
+		z-index: 90;
 
-		> .background {
-			background: {
-				repeat: no-repeat;
-				position: center center;
-				size: cover;
-			};
-			height: 100%;
+		> nav {
+			overflow: hidden;
+			width: 100%;
+
+			@media screen and (max-width: $narrow) {
+				height: $nav-height / 1.8;
+			}
 		}
 	}
-
-	> .wildhart-image > .background {
-		background-image: linear-gradient(to top, $gradient-color, transparent 30%), url("/img/wildhart.large.jpg");
-		background-position: center bottom;
-		@include position(none none $nav-height none, relative);
-
-		@media screen and (max-width: $narrow) {
-			bottom: $nav-height / 1.8;
-		}
-	}
-
-	> .spacer {
-		height: 500px;
-
-		@media screen and (max-height: $narrow) {
-			height: 470px;
-		}
-	}
-
-	> .space-image {
-		height: 1120px;
-
-		> .background {
-			background-image: url("/img/rymden.jpg");
-			@include position(-15em none none none, relative);
-		}
-	}
-}
-
-.foreground {
-	position: relative;
-	z-index: 1;
 }
 
 .nav-heading {
@@ -174,7 +132,15 @@ header {
 	height: 3rem;
 }
 
-.social-links {
+
+
+$text-shadow: unquote("#{nth($heading-text-shadow-offsets, 1)} 0 #{nth($heading-text-shadow-colors, 1)}");
+
+@for $i from 2 to (length($heading-text-shadow-colors) + 1) {
+	$text-shadow: append($text-shadow, unquote("#{nth($heading-text-shadow-offsets, $i)} 0 #{nth($heading-text-shadow-colors, $i)}"), comma);
+}
+
+.social-links, .site-nav > ul {
 	@include flexbox-container;
 
 	color: $social-links-color;
@@ -185,9 +151,49 @@ header {
 		text-align: center;
 
 		> a {
+			border: 4px solid $border-color;
+		}
+	}
+}
+
+.site-nav {
+	@include position(none none 0 none);
+	width: 100%;
+	z-index: 90;
+
+	ul {
+		> li {
+			> a {
+				$font-size: 4em;
+
+				border-bottom: 0;
+				color: $heading-color;
+				display: block;
+				font: normal $font-size flood-std;
+				line-height: $nav-height / $font-size;
+				padding: .1em 0;
+				text-align: center;
+				text-shadow: $text-shadow;
+
+				&.om {
+					background-color: $description-bg-color;
+					border-width: $border-width 0 $border-width/2 $border-width;
+				}
+
+				&.bilder {
+					background-color: $bg-color;
+					border-width: $border-width $border-width $border-width/2 $border-width;
+				}
+			}
+		}
+	}
+}
+
+.social-links {
+	> li {
+		> a {
 			$font-size: 2.5em;
 
-			border-bottom: 0;
 			display: block;
 			font-size: $font-size;
 			line-height: $nav-height / $font-size;
@@ -203,6 +209,7 @@ header {
 			&.icon-youtube {
 				$youtube-color: hsl(358, 79%, 45%);
 				background-color: lighten($youtube-color, 5%);
+				border-width: 0 0 $border-width $border-width;
 
 				&:hover, &:focus {
 					background-color: $youtube-color;
@@ -211,6 +218,7 @@ header {
 			&.icon-soundcloud {
 				$soundcloud-color: hsl(28, 100%, 50%);
 				background-color: lighten($soundcloud-color, 5%);
+				border-width: 0 0 $border-width $border-width;
 
 				&:hover, &:focus {
 					background-color: $soundcloud-color;
@@ -219,6 +227,7 @@ header {
 			&.icon-facebook {
 				$facebook-color: hsl(221, 44%, 41%);
 				background-color: lighten($facebook-color, 5%);
+				border-width: 0 $border-width $border-width $border-width;
 
 				&:hover, &:focus {
 					background-color: $facebook-color;
@@ -228,88 +237,105 @@ header {
 	}
 }
 
-.description, .soundcloud, .images {
-	$box-shadow-color: hsla(21, 80%, 60%, 0.3);
+.wildhart-titles {
+	height: 100%;
+	text-align: center;
+	@include position(none none 10% none);
+	width: 100%;
 
-	// box-shadow: -11em 0 0 $box-shadow-color inset, -8em 0 0 darken($box-shadow-color, 8%) inset, 11em 0 0 darken($box-shadow-color, 14%) inset, 13em 0 0 darken($box-shadow-color, 7%) inset;
-	padding-top: 2em !important;
+	> img {
+		$height: 17%;
+		$width: 50%;
+
+		height: auto;
+		position: absolute;
+		transition: {
+			property: opacity, bottom;
+			duration: $transition-duration;
+			timing-function: ease-out;
+		};
+		width: $width;
+
+		$b: 0%;
+
+		@for $i from 1 to 6 {
+			&.n#{$i} {
+				bottom: $b;
+				left: 50%;
+				margin-left: -#{($width/$i) / 2};
+				width: $width/$i;
+
+				$b: $b + ($height / $i);
+			}
+		}
+
+		@for $i from 5 to 0 {
+			z-index: $i;
+		}
+	}
+}
+
+.om-container, .bilder-container {
+	opacity: 0;
+	@include position(100% none none none);
+	text-align: center;
+	transition: {
+		property: top, opacity;
+		duration: $transition-duration;
+		timing-function: ease-out;
+	}
+	width: 100%;
+	z-index: 10;
 
 	> p {
 		margin: 0 auto 1em auto;
 		max-width: 20rem;
+		text-align: left;
 		width: 90%;
-
-		&:last-child {
-			margin-bottom: 0;
-		}
-	}
-
-	> h2 {
-		$text-shadow: unquote("#{nth($heading-text-shadow-offsets, 1)} 0 #{nth($heading-text-shadow-colors, 1)}");
-
-		@for $i from 2 to (length($heading-text-shadow-colors) + 1) {
-			$text-shadow: append($text-shadow, unquote("#{nth($heading-text-shadow-offsets, $i)} 0 #{nth($heading-text-shadow-colors, $i)}"), comma);
-		}
-
-		color: $heading-color;
-		font-size: 8em;
-		line-height: 1;
-		margin: 0 auto .5rem auto;
-		text-align: center;
-		text-shadow: $text-shadow;
-
-		@media screen and (max-width: $narrow) {
-			font-size: 3.6em;
-		}
 	}
 }
 
-.description {
-	@include gradient-bg($description-bg-color, $bg-color, 90%);
+.om-container {
 	padding: 3em 0;
 
-	@media screen and (max-height: $narrow) {
-		padding-top: 4em;
-	}
 }
 
-.soundcloud {
-	$gutter: 3em;
+.bilder-container {
+	min-height: 25em;
+}
 
-	box-shadow: 0 0 0 10px fade-out($color, .5) inset;
-	padding: 0 $gutter / 2;
+#om:target {
+	.wildhart-titles {
+		> img {
+			opacity: 0;
 
-	@media screen and (max-width: $narrow) {
-		box-shadow: 0 0 0 5px fade-out($color, .5) inset;
-		padding: $gutter / 6;
-	}
-
-	> .iframes {
-		flex-wrap: wrap;
-		@include justify-content(center);
-		width: 100%;
-
-		@media screen and (min-width: $narrow) {
-			@include flexbox-container;
-		}
-
-		> iframe {
-			display: block;
-			@include flex(1);
-			min-width: 400px;
-			padding: $gutter / 2;
-
-			@media screen and (max-width: $narrow) {
-				height: 300px;
-				padding: $gutter / 6;
-				min-width: 0;
-				width: 100%;
+			&.n1 {
+				bottom: 45%;
+				opacity: 1;
 			}
 		}
 	}
+
+	.om-container {
+		opacity: 1;
+		top: 50%;
+	}
 }
 
-.images {
-	@include gradient-bg($bg-color, darken($bg-color, 10%));
-	min-height: 25em;
+#bilder:target {
+	.wildhart-titles {
+		> img {
+			opacity: 0;
+
+			&.n1 {
+				bottom: 45%;
+				opacity: 1;
+			}
+		}
+	}
+
+	.bilder-container {
+		opacity: 1;
+		top: 50%;
+	}
 }

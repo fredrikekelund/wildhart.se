@@ -2,21 +2,11 @@
 <html lang="sv">
 	{% include header.html %}
 
-	<body>
-		<div id="background">
-			<div class="wildhart-image">
-				<div class="background"></div>
-			</div>
-			<div class="spacer"></div>
-			<div class="space-image">
-				<div class="background"></div>
-			</div>
-		</div>
-
-		<div class="foreground">
+	<body id="om">
+		<section id="bilder">
 			<header>
+				<h1 class="nav-heading">Wildhart</h1>
 				<nav>
-					<h1 class="nav-heading">Wildhart</h1>
 					<ul class="social-links">
 						<li><a class="icon-youtube only-icon" href="https://youtube.com">YouTube</a></li>
 						<li><a class="icon-soundcloud only-icon" href="https://soundcloud.com/wildhart">Soundcloud</a></li>
@@ -25,23 +15,20 @@
 				</nav>
 			</header>
 
-			<div class="description">
-				<h2>Wildhart</h2>
-				<p>Conveniently conceptualize technically <a href="#">sound functionalities</a> via frictionless collaboration and idea-sharing. Continually actualize bleeding-edge materials after efficient products. Progressively scale cutting-edge innovation whereas clicks-and-mortar convergence. Distinctively.</p>
-				<p>Continually restore <a href="#">team building metrics</a> without business resources. Phosfluorescently build collaborative deliverables with team building innovation. Conveniently evisculate best-of-breed vortals through distinctive models. Seamlessly cultivate.</p>
+			<nav class="site-nav">
+				<ul>
+					<li><a class="om" href="#om">Om</a></li>
+					<li><a class="bilder" href="#bilder">Bilder</a></li>
+				</ul>
+			</nav>
+
+			<div class="om-container">
+				{% for paragraph in site.data.description %}
+					<p>{{ paragraph }}</p>
+				{% endfor %}
 			</div>
 
-			<div class="soundcloud">
-				<h2>Musik</h2>
-				<div class="iframes">
-					{% for song in site.data.soundcloud %}
-						{{ song.iframe }}
-					{% endfor %}
-				</div>
-			</div>
-
-			<div class="images">
-				<h2>Bilder</h2>
+			<div class="bilder-container">
 				<div>
 					{% for image in site.data.images %}
 						<img src="{{ image.link }}" alt="{{ img.title }}">
@@ -49,7 +36,15 @@
 				</div>
 			</div>
 
-			{% include footer.html %}
-		</div>
+			<div class="wildhart-titles">
+				<img class="n5" src="/img/wildhart.text.jpg">
+				<img class="n4" src="/img/wildhart.text.jpg">
+				<img class="n3" src="/img/wildhart.text.jpg">
+				<img class="n2" src="/img/wildhart.text.jpg">
+				<img class="n1" src="/img/wildhart.text.jpg">
+			</div>
+		</section>
+
+		{% include footer.html %}
 	</body>
 </html>
