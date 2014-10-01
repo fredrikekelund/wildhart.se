@@ -1,12 +1,20 @@
 ---
 ---
 
+
+
+/* ==========================================================================
+   @imports
+   ========================================================================== */
 @import "position";
 @import "flexbox";
 @import "icomoon";
 
 
 
+/* ==========================================================================
+   Variables
+   ========================================================================== */
 $wide: 1000px;
 $middle: 800px;
 $narrow: 600px;
@@ -28,10 +36,14 @@ $gradient-color: hsla(0, 0%, 10%, .5);
 $description-bg-color: hsl(284, 84%, 61%);
 $images-bg-color: hsl(59, 86%, 56%);
 
-$transition-duration: .35s;
+$transition-duration: .45s;
+$transition-easing: cubic-bezier(1, 0, .95, .68);
 
 
 
+/* ==========================================================================
+   Mixins
+   ========================================================================== */
 @mixin only-icon {
 	overflow: hidden;
 	white-space: nowrap;
@@ -63,34 +75,55 @@ $transition-duration: .35s;
 
 
 
-* {
-	box-sizing: border-box;
-	margin: 0;
-	padding: 0;
+/* ==========================================================================
+   ID selectors
+   ========================================================================== */
+#about:target ~ .container {
+   	.wildhart-titles {
+   		> img {
+   			opacity: 0;
+
+   			&.n1 {
+   				bottom: 45%;
+   				opacity: 1;
+   			}
+   		}
+   	}
+
+   	.about-container {
+   		opacity: 1;
+   		top: 50%;
+   		transition-delay: 0;
+   		visibility: visible;
+   	}
 }
 
-a {
-	color: inherit;
-	border-bottom: 1px solid fade-out($color, .5);
-	text-decoration: none;
+#images:target ~ .container {
+   	.wildhart-titles {
+   		> img {
+   			opacity: 0;
+
+   			&.n1 {
+   				bottom: 45%;
+   				opacity: 1;
+   			}
+   		}
+   	}
+
+   	.images-container {
+   		opacity: 1;
+   		top: 50%;
+   		transition-delay: 0;
+   		visibility: visible;
+   	}
 }
 
-body, html {
-	height: 100%;
-}
 
-body {
-	background-color: $bg-color;
-	color: $color;
-	font: 16px/1.5 myriad-pro, arial, sans-serif;
-}
 
-h1, h2, h3 {
-	font-family: flood-std;
-	font-weight: normal;
-}
-
-section {
+/* ==========================================================================
+   Class selectors
+   ========================================================================== */
+.container {
 	background: {
 		image: linear-gradient(to top, $gradient-color, transparent 30%), url("/img/wildhart.large.jpg");
 		position: center center;
@@ -102,21 +135,12 @@ section {
 	position: relative;
 	width: 100%;
 
-	@media screen and (max-height: $narrow) {
-		height: 350px;
-	}
-
-	@media screen and (max-width: $narrow) {
-		bottom: $nav-height / 1.8;
-	}
-
 	> header {
 		@include position(0 none none none);
 		width: 100%;
 		z-index: 90;
 
 		> nav {
-			overflow: hidden;
 			width: 100%;
 
 			@media screen and (max-width: $narrow) {
@@ -133,13 +157,6 @@ section {
 }
 
 
-
-$text-shadow: unquote("#{nth($heading-text-shadow-offsets, 1)} 0 #{nth($heading-text-shadow-colors, 1)}");
-
-@for $i from 2 to (length($heading-text-shadow-colors) + 1) {
-	$text-shadow: append($text-shadow, unquote("#{nth($heading-text-shadow-offsets, $i)} 0 #{nth($heading-text-shadow-colors, $i)}"), comma);
-}
-
 .social-links, .site-nav > ul {
 	@include flexbox-container;
 
@@ -151,7 +168,7 @@ $text-shadow: unquote("#{nth($heading-text-shadow-offsets, 1)} 0 #{nth($heading-
 		text-align: center;
 
 		> a {
-			border: 4px solid $border-color;
+			border: $border-width solid $border-color;
 		}
 	}
 }
@@ -165,6 +182,11 @@ $text-shadow: unquote("#{nth($heading-text-shadow-offsets, 1)} 0 #{nth($heading-
 		> li {
 			> a {
 				$font-size: 4em;
+				$text-shadow: unquote("#{nth($heading-text-shadow-offsets, 1)} 0 #{nth($heading-text-shadow-colors, 1)}");
+
+				@for $i from 2 to (length($heading-text-shadow-colors) + 1) {
+					$text-shadow: append($text-shadow, unquote("#{nth($heading-text-shadow-offsets, $i)} 0 #{nth($heading-text-shadow-colors, $i)}"), comma);
+				}
 
 				border-bottom: 0;
 				color: $heading-color;
@@ -175,12 +197,12 @@ $text-shadow: unquote("#{nth($heading-text-shadow-offsets, 1)} 0 #{nth($heading-
 				text-align: center;
 				text-shadow: $text-shadow;
 
-				&.om {
+				&.about {
 					background-color: $description-bg-color;
 					border-width: $border-width 0 $border-width/2 $border-width;
 				}
 
-				&.bilder {
+				&.images {
 					background-color: $bg-color;
 					border-width: $border-width $border-width $border-width/2 $border-width;
 				}
@@ -252,7 +274,7 @@ $text-shadow: unquote("#{nth($heading-text-shadow-offsets, 1)} 0 #{nth($heading-
 		transition: {
 			property: opacity, bottom;
 			duration: $transition-duration;
-			timing-function: ease-out;
+			timing-function: $transition-easing;
 		};
 		width: $width;
 
@@ -275,67 +297,103 @@ $text-shadow: unquote("#{nth($heading-text-shadow-offsets, 1)} 0 #{nth($heading-
 	}
 }
 
-.om-container, .bilder-container {
+.about-container, .images-container {
 	opacity: 0;
 	@include position(100% none none none);
 	text-align: center;
 	transition: {
-		property: top, opacity;
+		property: top, opacity, visibility;
+		delay: 0, 0, $transition-duration;
 		duration: $transition-duration;
-		timing-function: ease-out;
+		timing-function: $transition-easing;
 	}
+	visibility: hidden;
 	width: 100%;
 	z-index: 10;
 
-	> p {
-		margin: 0 auto 1em auto;
+	> div {
+		background-color: fade-out($border-color, .2);
+		border: $border-width * 2 solid $border-color;
+		display: inline-block;
+		margin: 0 auto;
 		max-width: 20rem;
-		text-align: left;
-		width: 90%;
+		padding: 1em;
+
+		> p {
+			margin: 0 auto 1em auto;
+			text-align: left;
+			width: 100%;
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
 	}
 }
 
-.om-container {
-	padding: 3em 0;
-
-}
-
-.bilder-container {
+.images-container {
 	min-height: 25em;
-}
 
-#om:target {
-	.wildhart-titles {
-		> img {
-			opacity: 0;
+	> div {
+		max-width: 40em;
+		padding: 0 0 1em 0;
 
-			&.n1 {
-				bottom: 45%;
-				opacity: 1;
+		> .image-link {
+			border-bottom-width: 0;
+			display: block;
+			float: left;
+			height: 10em;
+			overflow: hidden;
+			padding: 1em;
+			position: relative;
+			width: 50%;
+
+			&:nth-child(even) {
+				padding-left: 0;
+			}
+
+			> img {
+				display: block;
+				height: auto;
+				width: 100%;
 			}
 		}
-	}
 
-	.om-container {
-		opacity: 1;
-		top: 50%;
+		> .close {
+			display: inline-block;
+			margin: 1em 0 0 1em;
+		}
 	}
 }
 
-#bilder:target {
-	.wildhart-titles {
-		> img {
-			opacity: 0;
 
-			&.n1 {
-				bottom: 45%;
-				opacity: 1;
-			}
-		}
-	}
 
-	.bilder-container {
-		opacity: 1;
-		top: 50%;
-	}
+/* ==========================================================================
+   Tag selectors
+   ========================================================================== */
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+a {
+	color: inherit;
+	border-bottom: 1px solid fade-out($color, .5);
+	text-decoration: none;
+}
+
+body, html {
+	height: 100%;
+}
+
+body {
+	background-color: $bg-color;
+	color: $color;
+	font: 16px/1.5 myriad-pro, arial, sans-serif;
+}
+
+h1, h2, h3 {
+	font-family: flood-std;
+	font-weight: normal;
 }

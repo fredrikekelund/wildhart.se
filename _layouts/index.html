@@ -2,8 +2,11 @@
 <html lang="sv">
 	{% include header.html %}
 
-	<body id="om">
-		<section id="bilder">
+	<body>
+		<div id="about"></div>
+		<div id="images"></div>
+
+		<section class="container">
 			<header>
 				<h1 class="nav-heading">Wildhart</h1>
 				<nav>
@@ -17,31 +20,37 @@
 
 			<nav class="site-nav">
 				<ul>
-					<li><a class="om" href="#om">Om</a></li>
-					<li><a class="bilder" href="#bilder">Bilder</a></li>
+					<li><a class="about" href="#about">About</a></li>
+					<li><a class="images" href="#images">images</a></li>
 				</ul>
 			</nav>
 
-			<div class="om-container">
-				{% for paragraph in site.data.description %}
-					<p>{{ paragraph }}</p>
-				{% endfor %}
+			<div class="about-container">
+				<div>
+					{% for paragraph in site.data.description %}
+						<p>{{ paragraph }}</p>
+					{% endfor %}
+					<a class="close" href="#">Close</a>
+				</div>
 			</div>
 
-			<div class="bilder-container">
+			<div class="images-container">
 				<div>
 					{% for image in site.data.images %}
-						<img src="{{ image.link }}" alt="{{ img.title }}">
+						<a class="image-link" href="{{ image.url }}">
+							<img src="{{ image.url }}" alt="{{ img.title }}">
+						</a>
 					{% endfor %}
+					<a class="close" href="#">Close</a>
 				</div>
 			</div>
 
 			<div class="wildhart-titles">
-				<img class="n5" src="/img/wildhart.text.jpg">
-				<img class="n4" src="/img/wildhart.text.jpg">
-				<img class="n3" src="/img/wildhart.text.jpg">
-				<img class="n2" src="/img/wildhart.text.jpg">
-				<img class="n1" src="/img/wildhart.text.jpg">
+				<img class="n5" src="/img/wildhart.text.png">
+				<img class="n4" src="/img/wildhart.text.png">
+				<img class="n3" src="/img/wildhart.text.png">
+				<img class="n2" src="/img/wildhart.text.png">
+				<img class="n1" src="/img/wildhart.text.png">
 			</div>
 		</section>
 
