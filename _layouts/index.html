@@ -36,11 +36,11 @@
 
 			<div class="images-container">
 				<div>
-					{% for image in site.data.images %}
-						<a class="image-link" href="{{ image.url }}">
-							<img src="{{ image.url }}" alt="{{ img.title }}">
-						</a>
-					{% endfor %}
+					<div class="images">
+						{% for image in site.data.images %}
+							<a class="image-link" href="{{ image.url }}" style="background-image: url('{{ image.url }}')"></a>
+						{% endfor %}
+					</div>
 					<a class="close" href="#">Close</a>
 				</div>
 			</div>
