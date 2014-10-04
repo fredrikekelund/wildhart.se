@@ -282,6 +282,16 @@ $transition-easing: cubic-bezier(.8, 0, 1, .8);
 				}
 			}
 
+			&.icon-spotify {
+				$spotify-color: hsl(78, 90%, 32%);
+				background-color: lighten($spotify-color, 5%);
+				border-width: 0 0 $border-width $border-width;
+
+				&:hover, &:focus {
+					background-color: $spotify-color;
+				}
+			}
+
 			&.icon-facebook {
 				$facebook-color: hsl(221, 44%, 41%);
 				background-color: lighten($facebook-color, 5%);
