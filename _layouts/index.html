@@ -39,7 +39,7 @@
 				<div>
 					<div class="images">
 						{% for image in site.data.images %}
-							<a class="image-link" href="{{ image.url }}" style="background-image: url('{{ image.url }}')"></a>
+							<a class="image-link" href="{{ image.url }}" style="background-image: url('{{ image.thumburl }}')"></a>
 						{% endfor %}
 					</div>
 					<a class="close" href="#">Close</a>
