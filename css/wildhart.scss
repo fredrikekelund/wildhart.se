@@ -136,6 +136,9 @@ $transition-easing: cubic-bezier(.8, 0, 1, .8);
 			opacity: 0;
 
 			&.n1 {
+				-moz-filter: invert(100%);
+				-webkit-filter: invert(100%);
+				filter: invert(100%);
 				opacity: 1;
 
 				@media screen and (max-height: $narrow) {
@@ -321,9 +324,10 @@ $transition-easing: cubic-bezier(.8, 0, 1, .8);
 		$width: 50%;
 
 		height: auto;
+		left: 50%;
 		position: absolute;
 		transition: {
-			property: opacity, bottom, margin-bottom;
+			property: opacity, bottom, margin-bottom, -moz-filter, -webkit-filter, filter;
 			duration: $transition-duration;
 			timing-function: $transition-easing;
 		};
@@ -335,7 +339,6 @@ $transition-easing: cubic-bezier(.8, 0, 1, .8);
 		@for $i from 1 to 6 {
 			&.n#{$i} {
 				bottom: $b;
-				left: 50%;
 				margin-left: -#{($width/$i) / 2};
 				width: $width/$i;
 
