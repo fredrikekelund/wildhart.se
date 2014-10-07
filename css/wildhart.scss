@@ -25,8 +25,8 @@ $nav-height: 4em;
 $border-width: 2px;
 
 $color: white;
-$border-color: hsl(335, 86%, 26%);
-$social-links-color: white;
+$border-color: fade-out(white, .7);
+$social-links-bg-color: fade-out(white, .5);
 $heading-color: white;
 $heading-text-shadow-colors: hsl(335, 86%, 26%), hsl(225, 86%, 56%), hsl(60, 100%, 50%);
 $heading-text-shadow-offsets: 0 2px, -1px -1px, -3px 3px;
@@ -73,6 +73,17 @@ $transition-easing: cubic-bezier(.8, 0, 1, .8);
 	}
 }
 
+@mixin targeted-container ($top: 45%) {
+	opacity: 1;
+	top: $top;
+	transition-delay: 0;
+	visibility: visible;
+
+	@media screen and (max-height: $narrow) {
+		top: 0;
+	}
+}
+
 
 
 /* ==========================================================================
@@ -81,57 +92,57 @@ $transition-easing: cubic-bezier(.8, 0, 1, .8);
 #about:target ~ .container {
 	.wildhart-titles {
 		> img {
-			opacity: 0;
-
 			&.n1 {
 				bottom: 45%;
-				opacity: 1;
-				z-index: 100;
-
-				@media screen and (max-height: $narrow) {
-					bottom: 65%;
-				}
 			}
 		}
 	}
 
 	.about-container {
-		opacity: 1;
-		top: 50%;
-		transition-delay: 0;
-		visibility: visible;
-
-		@media screen and (max-height: $narrow) {
-			top: 30%;
-		}
+		@include targeted-container(50%);
 	}
 }
 
 #images:target ~ .container {
 	.wildhart-titles {
 		> img {
-			opacity: 0;
-
 			&.n1 {
 				bottom: 55%;
-				opacity: 1;
-				z-index: 100;
-
-				@media screen and (max-height: $narrow) {
-					bottom: 65%;
-				}
 			}
 		}
 	}
 
 	.images-container {
-		opacity: 1;
-		top: 40%;
-		transition-delay: 0;
-		visibility: visible;
+		@include targeted-container(40%);
+	}
+}
 
-		@media screen and (max-height: $narrow) {
-			top: 30%;
+#about:target ~ .container, #images:target ~ .container {
+	@media screen and (max-height: $narrow) {
+		.social-links {
+			background-color: fade-out(white, 1);
+		}
+
+		.site-nav {
+			opacity: 0;
+			visibility: hidden;
+			transition-delay: 0, $transition-duration;
+		}
+	}
+
+
+	.wildhart-titles {
+		> img {
+			opacity: 0;
+
+			&.n1 {
+				opacity: 1;
+
+				@media screen and (max-height: $narrow) {
+					bottom: 100%;
+					margin-bottom: -9em;
+				}
+			}
 		}
 	}
 }
@@ -177,22 +188,79 @@ $transition-easing: cubic-bezier(.8, 0, 1, .8);
 
 .social-links, .site-nav > ul {
 	@include flexbox-container;
-
-	color: $social-links-color;
 	list-style: none;
 
 	> li {
 		@include flex(1);
 		text-align: center;
+	}
+}
 
+.social-links {
+	background-color: $social-links-bg-color;
+	transition: background-color $transition-duration linear;
+
+	> li {
 		> a {
-			border: $border-width solid $border-color;
+			$font-size: 2.5em;
+
+			border-bottom: 0;
+			display: block;
+			font-size: $font-size;
+			line-height: $nav-height / $font-size;
+			transition: background-color .2s linear;
+			// text-shadow: 0 0 20px $social-links-bg-color;
+
+			@media screen and (max-width: $narrow) {
+				$smaller-font-size: 1.75;
+				font-size: unquote("#{$smaller-font-size}em");
+			}
+
+			&.icon-youtube {
+				$youtube-color: hsl(358, 79%, 45%);
+				color: lighten($youtube-color, 5%);
+
+				&:hover, &:focus {
+					color: $youtube-color;
+				}
+			}
+
+			&.icon-soundcloud {
+				$soundcloud-color: hsl(28, 100%, 50%);
+				color: lighten($soundcloud-color, 5%);
+
+				&:hover, &:focus {
+					color: $soundcloud-color;
+				}
+			}
+
+			&.icon-spotify {
+				$spotify-color: hsl(78, 90%, 32%);
+				color: lighten($spotify-color, 5%);
+
+				&:hover, &:focus {
+					color: $spotify-color;
+				}
+			}
+
+			&.icon-facebook {
+				$facebook-color: hsl(221, 44%, 41%);
+				color: lighten($facebook-color, 5%);
+
+				&:hover, &:focus {
+					color: $facebook-color;
+				}
+			}
 		}
 	}
 }
 
 .site-nav {
 	@include position(none none 0 none);
+	transition: {
+		duration: $transition-duration, 0;
+		property: opacity, visibility;
+	};
 	width: 100%;
 	z-index: 90;
 
@@ -216,7 +284,7 @@ $transition-easing: cubic-bezier(.8, 0, 1, .8);
 				text-shadow: $text-shadow;
 
 				&.about {
-					background-color: $description-bg-color;
+					// background-color: $description-bg-color;
 					border-width: $border-width 0 $border-width/2 $border-width;
 
 					@media screen and (max-width: $narrower) {
@@ -225,7 +293,7 @@ $transition-easing: cubic-bezier(.8, 0, 1, .8);
 				}
 
 				&.images {
-					background-color: $bg-color;
+					// background-color: $bg-color;
 					border-width: $border-width $border-width $border-width/2 $border-width;
 
 					@media screen and (max-width: $narrower) {
@@ -236,73 +304,6 @@ $transition-easing: cubic-bezier(.8, 0, 1, .8);
 				@media screen and (max-width: $narrower) {
 					font-size: $font-size / 2;
 					line-height: $nav-height / ($font-size / 1.5);
-				}
-			}
-		}
-	}
-}
-
-.social-links {
-	> li {
-		> a {
-			$font-size: 2.5em;
-
-			display: block;
-			font-size: $font-size;
-			line-height: $nav-height / $font-size;
-			transition: background-color .2s linear;
-
-			@media screen and (max-width: $narrow) {
-				$smaller-font-size: 1.75;
-
-				font-size: unquote("#{$smaller-font-size}em");
-			}
-
-			&.icon-youtube {
-				$youtube-color: hsl(358, 79%, 45%);
-				background-color: lighten($youtube-color, 5%);
-				border-width: 0 0 $border-width $border-width;
-
-				&:hover, &:focus {
-					background-color: $youtube-color;
-				}
-
-				@media screen and (max-width: $narrower) {
-					border-left-width: 0;
-				}
-			}
-
-			&.icon-soundcloud {
-				$soundcloud-color: hsl(28, 100%, 50%);
-				background-color: lighten($soundcloud-color, 5%);
-				border-width: 0 0 $border-width $border-width;
-
-				&:hover, &:focus {
-					background-color: $soundcloud-color;
-				}
-			}
-
-			&.icon-spotify {
-				$spotify-color: hsl(78, 90%, 32%);
-				background-color: lighten($spotify-color, 5%);
-				border-width: 0 0 $border-width $border-width;
-
-				&:hover, &:focus {
-					background-color: $spotify-color;
-				}
-			}
-
-			&.icon-facebook {
-				$facebook-color: hsl(221, 44%, 41%);
-				background-color: lighten($facebook-color, 5%);
-				border-width: 0 $border-width $border-width $border-width;
-
-				&:hover, &:focus {
-					background-color: $facebook-color;
-				}
-
-				@media screen and (max-width: $narrower) {
-					border-right-width: 0;
 				}
 			}
 		}
@@ -322,7 +323,7 @@ $transition-easing: cubic-bezier(.8, 0, 1, .8);
 		height: auto;
 		position: absolute;
 		transition: {
-			property: opacity, bottom;
+			property: opacity, bottom, margin-bottom;
 			duration: $transition-duration;
 			timing-function: $transition-easing;
 		};
@@ -352,6 +353,10 @@ $transition-easing: cubic-bezier(.8, 0, 1, .8);
 				z-index: $i;
 			}
 		}
+
+		&.n1 {
+			z-index: 100;
+		}
 	}
 }
 
@@ -369,9 +374,18 @@ $transition-easing: cubic-bezier(.8, 0, 1, .8);
 	width: 100%;
 	z-index: 10;
 
+	@media screen and (max-height: $narrow) {
+		height: 100%;
+
+		> div {
+			height: 100%;
+		}
+	}
+
 	> div {
-		background-color: fade-out($border-color, .2);
-		border: $border-width * 2 solid $border-color;
+		background-color: fade-out(hsl(206, 33%, 57%), .5);
+		background-image: radial-gradient(ellipse at 30% 40% , fade-out(hsl(221, 77%, 69%), .2), fade-out($bg-color, .3));
+		border: $border-width solid $border-color;
 		display: inline-block;
 		margin: 0 auto;
 		max-width: 100%;
@@ -379,9 +393,8 @@ $transition-easing: cubic-bezier(.8, 0, 1, .8);
 
 		@media screen and (max-width: $narrower) {
 			background-color: fade-out($border-color, .1);
-			border-width: $border-width * 2 0;
-			margin-top: -6em;
-			padding-top: 5em;
+			border-width: 0;
+			padding-top: 7em;
 		}
 
 		> p {
