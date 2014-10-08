@@ -34,6 +34,9 @@ $gradient-color: hsla(0, 0%, 10%, .5);
 $description-bg-color: hsl(284, 84%, 61%);
 $images-bg-color: hsl(59, 86%, 56%);
 
+$container-bg-color-1: hsl(221, 77%, 69%);
+$container-bg-color-2: $bg-color;
+
 $transition-duration: .45s;
 $transition-easing: cubic-bezier(.1, 1, .75, 1);
 
@@ -73,12 +76,11 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 
 @mixin targeted-container ($top: 45%) {
 	opacity: 1;
-	top: $top;
 	transition-delay: 0;
 	visibility: visible;
 
-	@media screen and (max-height: $narrow) {
-		top: 0;
+	> div {
+		transform: translateY(0);
 	}
 }
 
@@ -97,7 +99,7 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 	}
 
 	.about-container {
-		@include targeted-container(50%);
+		@include targeted-container;
 	}
 }
 
@@ -111,7 +113,7 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 	}
 
 	.images-container {
-		@include targeted-container(40%);
+		@include targeted-container;
 	}
 }
 
@@ -287,7 +289,6 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 				text-shadow: $text-shadow;
 
 				&.about {
-					// background-color: $description-bg-color;
 					border-width: $border-width 0 $border-width/2 $border-width;
 
 					@media screen and (max-width: $narrower) {
@@ -296,7 +297,6 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 				}
 
 				&.images {
-					// background-color: $bg-color;
 					border-width: $border-width $border-width $border-width/2 $border-width;
 
 					@media screen and (max-width: $narrower) {
@@ -363,56 +363,9 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 	}
 }
 
-.about-container, .images-container {
-	opacity: 0;
-	@include position(100% none none none);
-	text-align: center;
-	transition: {
-		property: top, opacity, visibility;
-		delay: 0, 0, $transition-duration;
-		duration: $transition-duration;
-		timing-function: $transition-easing;
-	}
-	visibility: hidden;
-	width: 100%;
-	z-index: 10;
-
-	@media screen and (max-height: $narrow) {
-		height: 100%;
-
-		> div {
-			height: 100%;
-		}
-	}
-
-	> div {
-		background-color: fade-out(hsl(206, 33%, 57%), .5);
-		background-image: radial-gradient(ellipse at 30% 40% , fade-out(hsl(221, 77%, 69%), .2), fade-out($bg-color, .3));
-		border: $border-width solid $border-color;
-		display: inline-block;
-		margin: 0 auto;
-		max-width: 100%;
-		padding: 1em;
-
-		@media screen and (max-width: $narrower) {
-			background-color: fade-out($border-color, .1);
-			border-width: 0;
-			padding-top: 7em;
-		}
-
-		> p {
-			margin: 0 auto 1em auto;
-			text-align: left;
-			width: 100%;
-
-			&:last-child {
-				margin-bottom: 0;
-			}
-		}
-	}
-}
-
 .about-container {
+	top: 50%;
+
 	> div {
 		max-width: 20rem;
 	}
@@ -420,6 +373,7 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 
 .images-container {
 	min-height: 25em;
+	top: 40%;
 
 	> div {
 		padding: {
@@ -458,6 +412,72 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 				content: "";
 				clear: both;
 				display: block;
+			}
+		}
+	}
+}
+
+.about-container, .images-container {
+	$bg-color: fade-out(hsl(206, 33%, 57%), .5);
+	$bg-gradient: radial-gradient(ellipse at 30% 40% , fade-out($container-bg-color-1, .2), fade-out($container-bg-color-2, .3));
+
+	opacity: 0;
+	position: absolute;
+	visibility: visible;
+	text-align: center;
+	transition: {
+		property: transform, opacity, visibility;
+		delay: 0, 0, $transition-duration;
+		duration: $transition-duration;
+		timing-function: $transition-easing;
+	}
+	visibility: hidden;
+	width: 100%;
+	z-index: 10;
+
+	@media screen and (max-height: $narrow) {
+		height: 100%;
+		top: 0;
+
+		> div {
+			height: 100%;
+		}
+	}
+
+	@media screen and (max-height: $narrow) {
+		background-color: $bg-color;
+		background-image: $bg-gradient;
+	}
+
+	> div {
+		border: $border-width solid $border-color;
+		display: inline-block;
+		margin: 0 auto;
+		padding: 1em;
+		transform: translateY(10em);
+		transition: transform $transition-duration $transition-easing;
+
+		@media screen and (min-height: $narrow) {
+			background-color: $bg-color;
+			background-image: $bg-gradient;
+		}
+
+		@media screen and (max-width: $narrow) {
+			max-width: 100%;
+		}
+
+		@media screen and (max-height: $narrow) {
+			border-width: 0;
+			padding-top: 7em;
+		}
+
+		> p {
+			margin: 0 auto 1em auto;
+			text-align: left;
+			width: 100%;
+
+			&:last-child {
+				margin-bottom: 0;
 			}
 		}
 	}
