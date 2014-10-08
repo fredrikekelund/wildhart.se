@@ -141,7 +141,7 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 
 
 	.wildhart-titles {
-		> img {
+		> div {
 			opacity: 0;
 
 			&.n1 {
@@ -155,11 +155,11 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 
 				@media screen and (max-height: $narrow) {
 					bottom: 100%;
-					margin-bottom: -9em;
+					margin-bottom: -10em;
 				}
 
 				@media screen and (max-height: $narrower) {
-					margin-bottom: -8em;
+					margin-bottom: -8.5em;
 				}
 			}
 		}
@@ -187,6 +187,14 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 	overflow: hidden;
 	position: relative;
 	width: 100%;
+
+	.webp & {
+		background-image: url("/img/wildhart.large.webp");
+		background-image:
+			linear-gradient(to top, $gradient-color, transparent 30%),
+			linear-gradient(to bottom, fade-out(hsl(0, 0%, 90%), .75), fade-out(hsl(0, 0%, 90%), 1) 20%),
+			url("/img/wildhart.large.webp");
+	}
 
 	> header {
 		@include position(0 none none none);
@@ -337,14 +345,24 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 	@include position(none none 10% none);
 	width: 100%;
 
-	> img {
+	> div {
 		$height: 17%;
 		$width: 50%;
 
-		height: auto;
+		background: {
+			image: url("/img/wildhart.text.png");
+			repeat: no-repeat;
+			position: center;
+			size: auto 100%;
+			size: contain;
+		};
 		left: 50%;
 		position: absolute;
 		width: $width;
+
+		.webp & {
+			background-image: url("/img/wildhart.text.webp");
+		}
 
 		$animation-delay: 0s;
 		$bottom: 0%;
@@ -354,6 +372,7 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 			&.n#{$i} {
 				animation: fade2 $transition-duration linear $animation-delay 1;
 				bottom: $bottom;
+				height: $height / $i;
 				margin-left: -#{($width / $i) / 2};
 				width: $width / $i;
 
