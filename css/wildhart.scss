@@ -143,16 +143,9 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 				filter: invert(100%);
 				opacity: 1;
 
-				@media screen and (max-height: $short) {
-					transform: translateY(-68vh);
-				}
-
 				@media screen and (max-height: $narrow) {
-					transform: translateY(-63vh);
-				}
-
-				@media screen and (max-height: $narrower) {
-					transform: translateY(-58vh);
+					bottom: 100%;
+					margin-bottom: -9em;
 				}
 			}
 		}
