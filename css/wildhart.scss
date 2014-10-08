@@ -20,14 +20,12 @@ $middle: 800px;
 $narrow: 600px;
 $narrower: 400px;
 
-$header-image-height: 100vh;
 $nav-height: 4em;
 $border-width: 2px;
 
 $color: white;
 $border-color: fade-out(white, .7);
 $social-links-bg-color: fade-out(white, .5);
-$heading-color: white;
 $heading-text-shadow-colors: hsl(335, 86%, 26%), hsl(225, 86%, 56%), hsl(60, 100%, 50%);
 $heading-text-shadow-offsets: 0 2px, -1px -1px, -3px 3px;
 
@@ -280,7 +278,7 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 				}
 
 				border-bottom: 0;
-				color: $heading-color;
+				color: $color;
 				display: block;
 				font: normal $font-size flood-std;
 				line-height: $nav-height / $font-size;
