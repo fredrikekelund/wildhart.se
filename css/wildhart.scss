@@ -18,7 +18,9 @@
 $wide: 1000px;
 $middle: 800px;
 $narrow: 600px;
-$narrower: 400px;
+$narrower: 450px;
+
+$short: 700px;
 
 $nav-height: 4em;
 $border-width: 2px;
@@ -118,7 +120,7 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 }
 
 #about:target ~ .container, #images:target ~ .container {
-	@media screen and (max-height: $narrow) {
+	@media screen and (max-height: $short) {
 		.social-links {
 			background-color: fade-out(white, 1);
 		}
@@ -141,9 +143,16 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 				filter: invert(100%);
 				opacity: 1;
 
+				@media screen and (max-height: $short) {
+					transform: translateY(-68vh);
+				}
+
 				@media screen and (max-height: $narrow) {
-					bottom: 100%;
-					margin-bottom: -9em;
+					transform: translateY(-63vh);
+				}
+
+				@media screen and (max-height: $narrower) {
+					transform: translateY(-58vh);
 				}
 			}
 		}
@@ -344,7 +353,7 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 
 				$b: $b + ($height / $i);
 
-				@media screen and (max-height: $narrow) {
+				@media screen and (max-height: $short) {
 					bottom: $c;
 					$c: $c + (($height - 3%) / $i);
 				}
@@ -435,7 +444,7 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 	width: 100%;
 	z-index: 10;
 
-	@media screen and (max-height: $narrow) {
+	@media screen and (max-height: $short) {
 		height: 100%;
 		top: 0;
 
@@ -444,7 +453,7 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 		}
 	}
 
-	@media screen and (max-height: $narrow) {
+	@media screen and (max-height: $short) {
 		background-color: $bg-color;
 		background-image: $bg-gradient;
 	}
@@ -466,7 +475,7 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 			max-width: 100%;
 		}
 
-		@media screen and (max-height: $narrow) {
+		@media screen and (max-height: $short) {
 			border-width: 0;
 			padding-top: 7em;
 		}
