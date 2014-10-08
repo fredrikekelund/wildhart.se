@@ -1,6 +1,6 @@
 # wildhart.se
 
-Hemsida för Wildhart. Publiceras med GitHub Pages.
+Website for the Swedish band Wildhart. Only CSS is used to achieve this, if I may say so, very dynamic and fairly interactive design. Well, besides [prefixfree](https://github.com/LeaVerou/prefixfree) and [Modernizr](http://modernizr.com), but JS libraries don't count in this contest, so I win anyway :dancers:
 
-## Kom igång lokalt
-Hemsidan går att kompilera lokalt med [Jekyll](http://jekyllrb.com/). Ha i åtanke att på Ubuntu behöver man installera paketet `ruby-dev` innan Jekyll för att det ska funka.  Använd sedan `jekyll serve --watch --baseurl=` and you're up and running!
+## Get started locally
+The site can be served locally using [Jekyll](http://jekyllrb.com/). Keep in mind that on an Ubuntu platform, the package `ruby-dev` is needed to install the Jekyll gem. Then use `jekyll serve --watch --baseurl=` to get up and running!
