@@ -169,6 +169,10 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 					bottom: 100%;
 					margin-bottom: -9em;
 				}
+
+				@media screen and (max-height: $narrower) {
+					margin-bottom: -8em;
+				}
 			}
 		}
 	}
@@ -181,12 +185,14 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
    ========================================================================== */
 .container {
 	background: {
+		image: url("/img/wildhart.large.jpg");
 		image:
 			linear-gradient(to top, $gradient-color, transparent 30%),
 			linear-gradient(to bottom, fade-out(hsl(0, 0%, 90%), .75), fade-out(hsl(0, 0%, 90%), 1) 20%),
 			url("/img/wildhart.large.jpg");
 		position: center center;
 		repeat: no-repeat;
+		size: auto 100%;
 		size: cover;
 	};
 	height: 100%;
@@ -496,6 +502,11 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 		@media screen and (max-height: $short) {
 			border-width: 0;
 			padding-top: 7em;
+		}
+
+		@media screen and (max-height: $narrower) {
+			font-size: .85em;
+			padding-top: 7.5em;
 		}
 
 		> p {
