@@ -76,7 +76,7 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 	}
 }
 
-@mixin targeted-container ($top: 45%) {
+@mixin targeted-container {
 	opacity: 1;
 	transition-delay: 0s;
 	visibility: visible;
@@ -385,7 +385,7 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 }
 
 .about-container {
-	top: 50%;
+	top: 40%;
 
 	> div {
 		max-width: 20rem;
