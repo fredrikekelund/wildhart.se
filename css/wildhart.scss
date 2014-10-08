@@ -86,6 +86,26 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 	}
 }
 
+@mixin fade {
+	0% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes fade {
+	@include fade;
+}
+
+@keyframes fade2 {
+	@include fade;
+}
+
 
 
 /* ==========================================================================
@@ -138,14 +158,16 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 			opacity: 0;
 
 			&.n1 {
+				animation: fade $transition-duration linear 0s 1;
 				-moz-filter: invert(100%);
 				-webkit-filter: invert(100%);
 				filter: invert(100%);
 				opacity: 1;
+				z-index: 100;
 
 				@media screen and (max-height: $narrow) {
 					bottom: 100%;
-					margin-bottom: -9.5em;
+					margin-bottom: -9em;
 				}
 			}
 		}
@@ -328,27 +350,25 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 		height: auto;
 		left: 50%;
 		position: absolute;
-		transition: {
-			property: opacity, bottom, margin-bottom, -moz-filter, -webkit-filter, filter;
-			duration: $transition-duration;
-			timing-function: $transition-easing;
-		};
 		width: $width;
 
-		$b: 0%;
-		$c: 8%;
+		$animation-delay: 0s;
+		$bottom: 0%;
+		$short-bottom: 8%;
 
 		@for $i from 1 to 6 {
 			&.n#{$i} {
-				bottom: $b;
-				margin-left: -#{($width/$i) / 2};
-				width: $width/$i;
+				animation: fade2 $transition-duration linear $animation-delay 1;
+				bottom: $bottom;
+				margin-left: -#{($width / $i) / 2};
+				width: $width / $i;
 
-				$b: $b + ($height / $i);
+				$animation-delay: $animation-delay + .075s;
+				$bottom: $bottom + ($height / $i);
 
 				@media screen and (max-height: $short) {
-					bottom: $c;
-					$c: $c + (($height - 3%) / $i);
+					bottom: $short-bottom;
+					$short-bottom: $short-bottom + (($height - 3%) / $i);
 				}
 			}
 		}
@@ -360,7 +380,12 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 		}
 
 		&.n1 {
-			z-index: 100;
+			transition: {
+				property: opacity, bottom, margin-bottom, z-index, -moz-filter, -webkit-filter, filter;
+				delay: 0, $transition-duration / 2, $transition-duration / 2, $transition-duration / 2, $transition-duration / 2, $transition-duration / 2, $transition-duration / 2;
+				duration: $transition-duration, 0, 0, 0, 0, 0, 0;
+				timing-function: linear;
+			};
 		}
 	}
 }
