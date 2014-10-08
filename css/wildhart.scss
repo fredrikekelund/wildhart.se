@@ -78,7 +78,7 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 
 @mixin targeted-container ($top: 45%) {
 	opacity: 1;
-	transition-delay: 0;
+	transition-delay: 0s;
 	visibility: visible;
 
 	> div {
@@ -90,7 +90,10 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 	0% {
 		opacity: 1;
 	}
-	50% {
+	45% {
+		opacity: 0;
+	}
+	55% {
 		opacity: 0;
 	}
 	100% {
@@ -112,28 +115,12 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
    ID selectors
    ========================================================================== */
 #about:target ~ .container {
-	.wildhart-titles {
-		> img {
-			&.n1 {
-				bottom: 45%;
-			}
-		}
-	}
-
 	.about-container {
 		@include targeted-container;
 	}
 }
 
 #images:target ~ .container {
-	.wildhart-titles {
-		> img {
-			&.n1 {
-				bottom: 55%;
-			}
-		}
-	}
-
 	.images-container {
 		@include targeted-container;
 	}
@@ -148,7 +135,7 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 		.site-nav {
 			opacity: 0;
 			visibility: hidden;
-			transition-delay: 0, $transition-duration;
+			transition-delay: 0s, $transition-duration;
 		}
 	}
 
@@ -159,6 +146,7 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 
 			&.n1 {
 				animation: fade $transition-duration linear 0s 1;
+				bottom: 55%;
 				-moz-filter: invert(100%);
 				-webkit-filter: invert(100%);
 				filter: invert(100%);
@@ -388,8 +376,8 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 		&.n1 {
 			transition: {
 				property: opacity, bottom, margin-bottom, z-index, -moz-filter, -webkit-filter, filter;
-				delay: 0, $transition-duration / 2, $transition-duration / 2, $transition-duration / 2, $transition-duration / 2, $transition-duration / 2, $transition-duration / 2;
-				duration: $transition-duration, 0, 0, 0, 0, 0, 0;
+				delay: 0s, $transition-duration / 2, $transition-duration / 2, $transition-duration / 2, $transition-duration / 2, $transition-duration / 2, $transition-duration / 2;
+				duration: $transition-duration, 0s, 0s, 0s, 0s, 0s, 0s;
 				timing-function: linear;
 			};
 		}
@@ -460,7 +448,7 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 	text-align: center;
 	transition: {
 		property: transform, opacity, visibility;
-		delay: 0, 0, $transition-duration;
+		delay: 0s, 0s, $transition-duration;
 		duration: $transition-duration;
 		timing-function: $transition-easing;
 	}
