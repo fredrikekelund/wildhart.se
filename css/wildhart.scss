@@ -400,9 +400,9 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 
 		&.n1 {
 			transition: {
-				property: opacity, bottom, margin-bottom, z-index, -moz-filter, -webkit-filter, filter;
-				delay: 0s, $transition-duration / 2, $transition-duration / 2, $transition-duration / 2, $transition-duration / 2, $transition-duration / 2, $transition-duration / 2;
-				duration: $transition-duration, 0s, 0s, 0s, 0s, 0s, 0s;
+				property: bottom, margin-bottom, z-index, -moz-filter, -webkit-filter, filter;
+				delay: $transition-duration / 2;
+				duration: 0s;
 				timing-function: linear;
 			};
 		}
