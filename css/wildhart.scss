@@ -95,7 +95,7 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 	.wildhart-titles {
 		> img {
 			&.n1 {
-				transform: translateY(-45vh);
+				bottom: 45%;
 			}
 		}
 	}
@@ -109,7 +109,7 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 	.wildhart-titles {
 		> img {
 			&.n1 {
-				transform: translateY(-55vh);
+				bottom: 55%;
 			}
 		}
 	}
@@ -145,7 +145,7 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 
 				@media screen and (max-height: $narrow) {
 					bottom: 100%;
-					margin-bottom: -9em;
+					margin-bottom: -9.5em;
 				}
 			}
 		}
@@ -329,7 +329,7 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 		left: 50%;
 		position: absolute;
 		transition: {
-			property: opacity, transform, margin-bottom, -moz-filter, -webkit-filter, filter;
+			property: opacity, bottom, margin-bottom, -moz-filter, -webkit-filter, filter;
 			duration: $transition-duration;
 			timing-function: $transition-easing;
 		};
