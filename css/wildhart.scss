@@ -18,7 +18,7 @@
 $wide: 1000px;
 $middle: 800px;
 $narrow: 600px;
-$narrower: 450px;
+$narrower: 475px;
 
 $short: 700px;
 
@@ -153,9 +153,9 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 				opacity: 1;
 				z-index: 100;
 
-				@media screen and (max-height: $narrow) {
+				@media screen and (max-height: $short) {
 					bottom: 100%;
-					margin-bottom: -10em;
+					margin-bottom: -14em;
 				}
 
 				@media screen and (max-height: $narrower) {
@@ -508,7 +508,7 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 		transform: translateY(10em);
 		transition: transform $transition-duration $transition-easing;
 
-		@media screen and (min-height: $narrow) {
+		@media screen and (min-height: $short) {
 			background-color: $bg-color;
 			background-image: $bg-gradient;
 		}
@@ -519,7 +519,7 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 
 		@media screen and (max-height: $short) {
 			border-width: 0;
-			padding-top: 7em;
+			padding-top: 12em;
 		}
 
 		@media screen and (max-height: $narrower) {
