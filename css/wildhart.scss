@@ -8,7 +8,7 @@
    ========================================================================== */
 @import "position";
 @import "flexbox";
-@import "icomoon";
+// @import "icomoon";
 
 
 
@@ -24,6 +24,9 @@ $short: 700px;
 
 $nav-height: 4em;
 $border-width: 2px;
+
+$background-image-jpg: "/img/wildhart.large-2.jpg";
+$background-image-webp: "/img/wildhart.large-2.webp";
 
 $color: white;
 $border-color: fade-out(white, .7);
@@ -84,6 +87,12 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 	> div {
 		transform: translateY(0);
 	}
+}
+
+@mixin filter ($function) {
+	-moz-filter: $function;
+	-webkit-filter: $function;
+	filter: $function;
 }
 
 @mixin fade {
@@ -147,23 +156,23 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 			&.n1 {
 				animation: fade $transition-duration linear 0s 1;
 				bottom: 55%;
-				-moz-filter: invert(100%);
-				-webkit-filter: invert(100%);
-				filter: invert(100%);
+				@include filter(invert(100%));
 				opacity: 1;
 				z-index: 100;
 
 				@media screen and (max-height: $short) {
 					bottom: 100%;
 					margin-bottom: -14em;
+					margin-left: -6.5em;
+					width: 13em;
 				}
 
 				@media screen and (max-height: $narrower) {
-					margin-bottom: -8.5em;
+					margin-bottom: -11.5em;
 				}
 
 				@media screen and (max-height: $narrower) and (min-width: $narrower - 50px) {
-					margin-bottom: -9.2em;
+					margin-bottom: -10.75em;
 					margin-left: -5em;
 					width: 10em;
 				}
@@ -179,11 +188,11 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
    ========================================================================== */
 .container {
 	background: {
-		image: url("/img/wildhart.large.jpg");
+		image: url($background-image-jpg);
 		image:
 			linear-gradient(to top, $gradient-color, transparent 30%),
 			linear-gradient(to bottom, fade-out(hsl(0, 0%, 90%), .75), fade-out(hsl(0, 0%, 90%), 1) 20%),
-			url("/img/wildhart.large.jpg");
+			url($background-image-jpg);
 		position: center center;
 		repeat: no-repeat;
 		size: auto 100%;
@@ -195,11 +204,11 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 	width: 100%;
 
 	.webp & {
-		background-image: url("/img/wildhart.large.webp");
+		// No browser supports webp but not CSS gradients
 		background-image:
 			linear-gradient(to top, $gradient-color, transparent 30%),
 			linear-gradient(to bottom, fade-out(hsl(0, 0%, 90%), .75), fade-out(hsl(0, 0%, 90%), 1) 20%),
-			url("/img/wildhart.large.webp");
+			url($background-image-webp);
 	}
 
 	> header {
@@ -235,58 +244,80 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 }
 
 .social-links {
-	// background-color: $social-links-bg-color;
-	transition: background-color $transition-duration linear;
+	padding-top: 2em;
+
+	@media screen and (max-width: $narrow) {
+		padding-top: 1em;
+	}
+
+	@media screen and (max-height: $short) {
+		padding-top: 1em;
+	}
 
 	> li {
 		> a {
 			$font-size: 2.5em;
 
+			background: url("/img/icons/sprite.png") top left no-repeat;
+			background-size: 100% auto;
 			border-bottom: 0;
-			display: block;
-			font-size: $font-size;
-			line-height: $nav-height / $font-size;
-			transition: background-color .2s linear;
+			display: inline-block;
+			font-size: .6em;
+			overflow: hidden;
+			text-indent: 100%;
+			transition: {
+				duration: .2s;
+				property: filter, -moz-filter, -webkit-filter;
+				timing-function: linear;
+			};
+			width: 8.3125em;
+
+			&:hover {
+				@include filter(invert(20%));
+			}
 
 			@media screen and (max-width: $narrow) {
-				$smaller-font-size: 2;
-				font-size: unquote("#{$smaller-font-size}em");
+				font-size: .45em;
 			}
 
-			&.icon-youtube {
+			@media screen and (max-height: $narrow) {
+				font-size: .45em;
+			}
+
+			@media screen and (max-width: $narrower) {
+				font-size: .375em;
+			}
+
+			.webp & {
+				background-image: url("/img/icons/sprite.webp");
+			}
+
+			&.youtube {
 				$youtube-color: lighten(hsl(358, 79%, 45%), 5%);
-				color: lighten($youtube-color, 5%);
 
-				&:hover, &:focus {
-					color: $youtube-color;
-				}
+				background-position: 50.538% 92.174%;
+				height: 5em;
 			}
 
-			&.icon-soundcloud {
+			&.soundcloud {
 				$soundcloud-color: lighten(hsl(28, 100%, 50%), 5%);
-				color: lighten($soundcloud-color, 5%);
 
-				&:hover, &:focus {
-					color: $soundcloud-color;
-				}
+				background-position: 50% 37.66%;
+				height: 4.375em;
 			}
 
-			&.icon-spotify {
+			&.spotify {
 				$spotify-color: hsl(90, 55%, 37%);
-				color: lighten($spotify-color, 5%);
 
-				&:hover, &:focus {
-					color: $spotify-color;
-				}
+				background-position: 50% 63.913%;
+				height: 5em;
 			}
 
-			&.icon-facebook {
+			&.facebook {
 				$facebook-color: hsl(221, 45%, 37%);
-				color: lighten($facebook-color, 5%);
 
-				&:hover, &:focus {
-					color: $facebook-color;
-				}
+				background-position: 50% 7.273%;
+				height: 6.25em;
 			}
 		}
 	}
@@ -519,12 +550,12 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 
 		@media screen and (max-height: $short) {
 			border-width: 0;
-			padding-top: 12em;
+			padding-top: 11em;
 		}
 
 		@media screen and (max-height: $narrower) {
 			font-size: .85em;
-			padding-top: 7.5em;
+			padding-top: 10em;
 		}
 
 		> p {
