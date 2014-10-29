@@ -4,6 +4,7 @@
 
 	<body>
 		<div id="about"></div>
+		<div id="contact"></div>
 		<div id="images"></div>
 
 		<section class="container">
@@ -21,6 +22,7 @@
 			<nav class="site-nav">
 				<ul>
 					<li><a class="about" href="#about">About</a></li>
+					<li><a href="#contact" class="contact">Contact</a></li>
 					<li><a class="images" href="#images">images</a></li>
 				</ul>
 			</nav>
@@ -28,6 +30,15 @@
 			<div class="about-container">
 				<div>
 					{% for paragraph in site.data.description %}
+						<p>{{ paragraph }}</p>
+					{% endfor %}
+					<a class="close" href="#">Close</a>
+				</div>
+			</div>
+
+			<div class="contact-container">
+				<div>
+					{% for paragraph in site.data.contact %}
 						<p>{{ paragraph }}</p>
 					{% endfor %}
 					<a class="close" href="#">Close</a>

@@ -129,13 +129,19 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 	}
 }
 
+#contact:target ~ .container {
+	.contact-container {
+		@include targeted-container;
+	}
+}
+
 #images:target ~ .container {
 	.images-container {
 		@include targeted-container;
 	}
 }
 
-#about:target ~ .container, #images:target ~ .container {
+#about:target ~ .container, #contact:target ~ .container, #images:target ~ .container {
 	@media screen and (max-height: $short) {
 		.social-links {
 			background-color: fade-out(white, 1);
@@ -147,7 +153,6 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 			transition-delay: 0s, $transition-duration;
 		}
 	}
-
 
 	.wildhart-titles {
 		> div, > h1 {
@@ -335,7 +340,7 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 	ul {
 		> li {
 			> a {
-				$font-size: 4em;
+				$font-size: 3.85em;
 				$text-shadow: unquote("#{nth($heading-text-shadow-offsets, 1)} 0 #{nth($heading-text-shadow-colors, 1)}");
 
 				@for $i from 2 to (length($heading-text-shadow-colors) + 1) {
@@ -367,9 +372,13 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 					}
 				}
 
-				@media screen and (max-width: $narrower) {
+				@media screen and (max-width: $narrow + 100px) {
 					font-size: $font-size / 2;
 					line-height: $nav-height / ($font-size / 1.5);
+				}
+
+				@media screen and (max-width: $narrower) {
+					font-size: $font-size / 2.65;
 				}
 			}
 		}
@@ -405,7 +414,7 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 		width: $width;
 
 		$animation-delay: 0s;
-		$bottom: 2.75%;
+		$bottom: 4%;
 		$font-size: 9em;
 
 		@for $i from 1 to 6 {
@@ -439,7 +448,7 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 	}
 }
 
-.about-container {
+.about-container, .contact-container {
 	top: 40%;
 
 	> div {
@@ -498,7 +507,7 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 	}
 }
 
-.about-container, .images-container {
+.about-container, .contact-container, .images-container {
 	$bg-color: fade-out(hsl(206, 33%, 57%), .5);
 	$bg-gradient: radial-gradient(ellipse at 30% 40% , fade-out($container-bg-color-1, .2), fade-out($container-bg-color-2, .3));
 
