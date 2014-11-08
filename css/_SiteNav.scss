@@ -10,6 +10,10 @@
 	@media screen and (min-width: $narrow) {
 		padding: 0 10%;
 	}
+
+	@media screen and (max-width: $narrow) {
+		height: $nav-height / 1.8;
+	}
 }
 .SiteNav-link {
 	$font-size: 3.5em;

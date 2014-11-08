@@ -214,36 +214,14 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 			linear-gradient(to bottom, fade-out(hsl(0, 0%, 90%), .75), fade-out(hsl(0, 0%, 90%), 1) 20%),
 			url($background-image-webp);
 	}
-
-	> header {
-		@include position(0 none none none);
-		width: 100%;
-		z-index: 90;
-
-		> nav {
-			width: 100%;
-
-			@media screen and (max-width: $narrow) {
-				height: $nav-height / 1.8;
-			}
-		}
-	}
+}
+.SiteHeader {
+	@include position(0 none none none);
+	width: 100%;
+	z-index: 90;
 }
 
 
-
-.SocialLinks,
-.SiteNav {
-	> ul {
-		@include flexbox-container;
-		list-style: none;
-
-		> li {
-			@include flex(1);
-			text-align: center;
-		}
-	}
-}
 
 .WildhartTitles {
 	height: 100%;
@@ -346,10 +324,6 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 	@media screen and (max-height: $short) {
 		height: 100%;
 		top: 0;
-
-		> div {
-			height: 100%;
-		}
 	}
 
 	@media screen and (max-height: $short) {
@@ -376,6 +350,7 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 
 	@media screen and (max-height: $short) {
 		border-width: 0;
+		height: 100%;
 		padding-top: 11em;
 	}
 
@@ -422,6 +397,19 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 	@media screen and (max-height: $short) {
 		font-size: 1.2em;
 	}
+}
+
+.u-flexbox {
+	@include flexbox-container;
+}
+.u-flex {
+	@include flex(1);
+}
+.u-plainList {
+	list-style: none;
+}
+.u-center {
+	text-align: center;
 }
 
 
