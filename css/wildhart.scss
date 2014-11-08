@@ -4,15 +4,6 @@
 
 
 /* ==========================================================================
-   @imports
-   ========================================================================== */
-@import "position";
-@import "flexbox";
-// @import "icomoon";
-
-
-
-/* ==========================================================================
    Variables
    ========================================================================== */
 $wide: 1000px;
@@ -121,14 +112,19 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 
 
 /* ==========================================================================
+   @imports
+   ========================================================================== */
+@import "position";
+@import "flexbox";
+
+@import "site-nav";
+@import "social-links";
+
+
+
+/* ==========================================================================
    ID selectors
    ========================================================================== */
-#about:target ~ .container {
-	.about-container {
-		@include targeted-container;
-	}
-}
-
 #contact:target ~ .container {
 	.contact-container {
 		@include targeted-container;
@@ -141,7 +137,7 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 	}
 }
 
-#about:target ~ .container, #contact:target ~ .container, #images:target ~ .container {
+#contact:target ~ .container, #images:target ~ .container {
 	@media screen and (max-height: $short) {
 		.social-links {
 			background-color: fade-out(white, 1);
@@ -156,36 +152,33 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 
 	.wildhart-titles {
 		> div, > h1 {
-			opacity: 0;
+			animation: fade $transition-duration linear 0s 1;
+			bottom: 55%;
+			color: white;
+			opacity: 1;
+			z-index: 100;
 
-			&.n1 {
-				animation: fade $transition-duration linear 0s 1;
-				bottom: 55%;
-				color: white;
-				opacity: 1;
-				z-index: 100;
+			@media screen and (max-height: $short) {
+				bottom: 100%;
+				margin-bottom: -16rem;
+				text-shadow: none;
+			}
 
-				@media screen and (max-height: $short) {
-					bottom: 100%;
-					margin-bottom: -16rem;
-				}
+			@media screen and (max-height: $short - 100px) {
+				margin-bottom: -14rem;
+			}
 
-				@media screen and (max-height: $short - 100px) {
-					margin-bottom: -14rem;
-				}
+			@media screen and (max-height: $narrower) {
+				margin-bottom: -12rem;
+			}
 
-				@media screen and (max-height: $narrower) {
-					margin-bottom: -12rem;
-				}
+			@media screen and (max-height: $narrower - 75px) {
+				margin-bottom: -10.5rem;
+			}
 
-				@media screen and (max-height: $narrower - 75px) {
-					margin-bottom: -10.5rem;
-				}
-
-				@media screen and (max-height: $narrower) and (min-width: $narrower - 50px) {
-					margin-bottom: -10.75rem;
-					width: 10rem;
-				}
+			@media screen and (max-height: $narrower) and (min-width: $narrower - 50px) {
+				margin-bottom: -10.75rem;
+				width: 10rem;
 			}
 		}
 	}
@@ -248,143 +241,6 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 	}
 }
 
-.social-links {
-	padding-top: 2em;
-
-	@media screen and (max-width: $narrow) {
-		padding-top: 1em;
-	}
-
-	@media screen and (max-height: $short) {
-		padding-top: .5em;
-	}
-
-	> li {
-		> a {
-			$font-size: 2.5em;
-
-			background: url("/img/icons/sprite.png") top left no-repeat;
-			background-size: 100% auto;
-			border-bottom: 0;
-			display: inline-block;
-			font-size: .6em;
-			overflow: hidden;
-			text-indent: 100%;
-			transition: {
-				duration: .2s;
-				property: filter, -moz-filter, -webkit-filter;
-				timing-function: linear;
-			};
-			width: 8.3125em;
-
-			&:hover {
-				@include filter(invert(20%));
-			}
-
-			@media screen and (max-width: $narrow) {
-				font-size: .45em;
-			}
-
-			@media screen and (max-height: $narrow) {
-				font-size: .45em;
-			}
-
-			@media screen and (max-width: $narrower) {
-				font-size: .375em;
-			}
-
-			.webp & {
-				background-image: url("/img/icons/sprite.webp");
-			}
-
-			&.youtube {
-				$youtube-color: lighten(hsl(358, 79%, 45%), 5%);
-
-				background-position: 50.538% 92.174%;
-				height: 5em;
-			}
-
-			&.soundcloud {
-				$soundcloud-color: lighten(hsl(28, 100%, 50%), 5%);
-
-				background-position: 50% 37.66%;
-				height: 4.375em;
-			}
-
-			&.spotify {
-				$spotify-color: hsl(90, 55%, 37%);
-
-				background-position: 50% 63.913%;
-				height: 5em;
-			}
-
-			&.facebook {
-				$facebook-color: hsl(221, 45%, 37%);
-
-				background-position: 50% 7.273%;
-				height: 6.25em;
-			}
-		}
-	}
-}
-
-.site-nav {
-	@include position(none none 0 none);
-	transition: {
-		duration: $transition-duration, 0;
-		property: opacity, visibility;
-	};
-	width: 100%;
-	z-index: 90;
-
-	ul {
-		> li {
-			> a {
-				$font-size: 3.85em;
-				$text-shadow: unquote("#{nth($heading-text-shadow-offsets, 1)} 0 #{nth($heading-text-shadow-colors, 1)}");
-
-				@for $i from 2 to (length($heading-text-shadow-colors) + 1) {
-					$text-shadow: append($text-shadow, unquote("#{nth($heading-text-shadow-offsets, $i)} 0 #{nth($heading-text-shadow-colors, $i)}"), comma);
-				}
-
-				border-bottom: 0;
-				color: $color;
-				display: block;
-				font: normal $font-size flood-std;
-				line-height: $nav-height / $font-size;
-				padding: .1em 0;
-				text-align: center;
-				// text-shadow: $text-shadow;
-
-				&.about {
-					border-width: $border-width 0 $border-width/2 $border-width;
-
-					@media screen and (max-width: $narrower) {
-						border-left-width: 0;
-					}
-				}
-
-				&.images {
-					border-width: $border-width $border-width $border-width/2 $border-width;
-
-					@media screen and (max-width: $narrower) {
-						border-right-width: 0;
-					}
-				}
-
-				@media screen and (max-width: $narrow + 100px) {
-					font-size: $font-size / 2;
-					line-height: $nav-height / ($font-size / 1.5);
-				}
-
-				@media screen and (max-width: $narrower) {
-					font-size: $font-size / 2.65;
-				}
-			}
-		}
-	}
-}
-
 .wildhart-titles {
 	height: 100%;
 	text-align: center;
@@ -407,9 +263,9 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 		$height: 17%;
 		$width: 63%;
 
-		color: black;
 		font: normal 100%/1 flood-std;
 		text-align: center;
+		text-shadow: 0 0 5px hsl(267, 92%, 77%);
 		position: absolute;
 		width: $width;
 
@@ -448,8 +304,8 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 	}
 }
 
-.about-container, .contact-container {
-	top: 40%;
+.contact-container {
+	top: 45%;
 
 	> div {
 		max-width: 20rem;
@@ -463,7 +319,7 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 
 .images-container {
 	min-height: 25em;
-	top: 40%;
+	top: 42%;
 
 	> div {
 		padding: {
@@ -507,10 +363,11 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 	}
 }
 
-.about-container, .contact-container, .images-container {
+.contact-container, .images-container {
 	$bg-color: fade-out(hsl(206, 33%, 57%), .5);
 	$bg-gradient: radial-gradient(ellipse at 30% 40% , fade-out($container-bg-color-1, .2), fade-out($container-bg-color-2, .3));
 
+	font-family: flood-std;
 	opacity: 0;
 	position: absolute;
 	visibility: visible;
@@ -524,6 +381,10 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 	visibility: hidden;
 	width: 100%;
 	z-index: 10;
+
+	@media screen and (min-height: $short) {
+		font-size: .75em;
+	}
 
 	@media screen and (max-height: $short) {
 		height: 100%;
@@ -566,13 +427,33 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 			padding-top: 10em;
 		}
 
+		@media screen and (max-width: $middle) and (min-width: $narrow) and (max-height: $short) and (min-height: $narrower) {
+			padding-top: 13em;
+		}
+
+		@media screen and (max-width: $wide) and (min-width: $middle) and (max-height: $short) and (min-height: $narrower) {
+			padding-top: 14.5em;
+		}
+
 		> p {
 			margin: 0 auto 1em auto;
 			text-align: left;
-			width: 100%;
+			width: 90%;
 
 			&:last-child {
 				margin-bottom: 0;
+			}
+		}
+
+		> p, > a {
+			font-size: 1.5em;
+
+			@media screen and (max-width: $middle) {
+				font-size: 1.2em;
+			}
+
+			@media screen and (max-height: $short) {
+				font-size: 1.2em;
 			}
 		}
 	}

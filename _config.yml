@@ -2,7 +2,7 @@ safe: true
 timezone: Europe/Stockholm
 
 sass:
-    sass_dir: _scss
+    sass_dir: css
     style: :compressed
 
 baseurl: /wildhart.se
