@@ -7,47 +7,47 @@
 		<div id="contact"></div>
 		<div id="images"></div>
 
-		<section class="container">
+		<section class="SiteContainer">
 			<header>
-				<nav>
-					<ul class="social-links">
-						<li><a class="youtube" href="https://www.youtube.com/user/wildhartmusic" target="_blank">YouTube</a></li>
-						<li><a class="soundcloud" href="https://soundcloud.com/wildhart" target="_blank">Soundcloud</a></li>
-						<!-- <li><a class="spotify" href="#" target="_blank">Spotify</a></li> -->
-						<li><a class="facebook" href="https://facebook.com/wildhartmusic" target="_blank">Facebook</a></li>
+				<nav class="SocialLinks">
+					<ul>
+						<li><a class="SocialLink SocialLink--youtube" href="https://www.youtube.com/user/wildhartmusic" target="_blank">YouTube</a></li>
+						<li><a class="SocialLink SocialLink--soundcloud" href="https://soundcloud.com/wildhart" target="_blank">Soundcloud</a></li>
+						<!-- <li><a class="SocialLink SocialLink--spotify" href="#" target="_blank">Spotify</a></li> -->
+						<li><a class="SocialLink SocialLink--facebook" href="https://facebook.com/wildhartmusic" target="_blank">Facebook</a></li>
 					</ul>
 				</nav>
 			</header>
 
-			<nav class="site-nav">
+			<nav class="SiteNav">
 				<ul>
-					<li><a href="#contact" class="contact">Contact</a></li>
-					<li><a class="images" href="#images">images</a></li>
+					<li><a class="SiteNav-link SiteNav-link--contact" href="#contact">Contact</a></li>
+					<li><a class="SiteNav-link SiteNav-link--images" href="#images">images</a></li>
 				</ul>
 			</nav>
 
-			<div class="contact-container">
-				<div>
+			<div class="ContentContainer ContactContainer">
+				<div class="ContentContainer-content ContactContainer-contact">
 					{% for paragraph in site.data.contact %}
-						<p>{{ paragraph }}</p>
+						<p class="ContentContainer-paragraph">{{ paragraph }}</p>
 					{% endfor %}
-					<a class="close" href="#">Close</a>
+					<a class="ContentContainer-close" href="#">Close</a>
 				</div>
 			</div>
 
-			<div class="images-container">
-				<div>
-					<div class="images">
+			<div class="ContentContainer ImagesContainer">
+				<div class="ContentContainer-content ImagesContainer-container">
+					<div class="ImagesContainer-images">
 						{% for image in site.data.images %}
-							<a class="image-link" href="{{ image.url }}" style="background-image: url('{{ image.thumburl }}')"></a>
+							<a class="ImagesContainer-imageLink" href="{{ image.url }}" style="background-image: url('{{ image.thumburl }}')"></a>
 						{% endfor %}
 					</div>
-					<a class="close" href="#">Close</a>
+					<a class="ContentContainer-close" href="#">Close</a>
 				</div>
 			</div>
 
-			<div class="wildhart-titles">
-				<h1 class="n1">Wildhart</h1>
+			<div class="WildhartTitles">
+				<h1 class="WildhartTitles-title">Wildhart</h1>
 			</div>
 		</section>
 

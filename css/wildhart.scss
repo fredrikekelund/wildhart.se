@@ -33,6 +33,9 @@ $images-bg-color: hsl(59, 86%, 56%);
 $container-bg-color-1: hsl(221, 77%, 69%);
 $container-bg-color-2: $bg-color;
 
+$content-container-bg-color: fade-out(hsl(206, 33%, 57%), .5);
+$content-container-bg-gradient: radial-gradient(ellipse at 30% 40% , fade-out($container-bg-color-1, .2), fade-out($container-bg-color-2, .3));
+
 $transition-duration: .45s;
 $transition-easing: cubic-bezier(.1, 1, .75, 1);
 
@@ -117,69 +120,67 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 @import "position";
 @import "flexbox";
 
-@import "site-nav";
-@import "social-links";
+@import "SiteNav";
+@import "SocialLinks";
 
 
 
 /* ==========================================================================
    ID selectors
    ========================================================================== */
-#contact:target ~ .container {
-	.contact-container {
+#contact:target ~ .SiteContainer {
+	.ContactContainer {
 		@include targeted-container;
 	}
 }
 
-#images:target ~ .container {
-	.images-container {
+#images:target ~ .SiteContainer {
+	.ImagesContainer {
 		@include targeted-container;
 	}
 }
 
-#contact:target ~ .container, #images:target ~ .container {
+#contact:target ~ .SiteContainer,
+#images:target ~ .SiteContainer {
 	@media screen and (max-height: $short) {
-		.social-links {
+		.SocialLinks {
 			background-color: fade-out(white, 1);
 		}
 
-		.site-nav {
+		.SiteNav {
 			opacity: 0;
 			visibility: hidden;
 			transition-delay: 0s, $transition-duration;
 		}
 	}
 
-	.wildhart-titles {
-		> div, > h1 {
-			animation: fade $transition-duration linear 0s 1;
-			bottom: 55%;
-			color: white;
-			opacity: 1;
-			z-index: 100;
+	.WildhartTitles-title {
+		animation: fade $transition-duration linear 0s 1;
+		bottom: 55%;
+		color: white;
+		opacity: 1;
+		z-index: 100;
 
-			@media screen and (max-height: $short) {
-				bottom: 100%;
-				margin-bottom: -16rem;
-				text-shadow: none;
-			}
+		@media screen and (max-height: $short) {
+			bottom: 100%;
+			margin-bottom: -16rem;
+			text-shadow: none;
+		}
 
-			@media screen and (max-height: $short - 100px) {
-				margin-bottom: -14rem;
-			}
+		@media screen and (max-height: $short - 100px) {
+			margin-bottom: -14rem;
+		}
 
-			@media screen and (max-height: $narrower) {
-				margin-bottom: -12rem;
-			}
+		@media screen and (max-height: $narrower) {
+			margin-bottom: -12rem;
+		}
 
-			@media screen and (max-height: $narrower - 75px) {
-				margin-bottom: -10.5rem;
-			}
+		@media screen and (max-height: $narrower - 75px) {
+			margin-bottom: -10.5rem;
+		}
 
-			@media screen and (max-height: $narrower) and (min-width: $narrower - 50px) {
-				margin-bottom: -10.75rem;
-				width: 10rem;
-			}
+		@media screen and (max-height: $narrower) and (min-width: $narrower - 50px) {
+			margin-bottom: -10.75rem;
 		}
 	}
 }
@@ -189,7 +190,7 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 /* ==========================================================================
    Class selectors
    ========================================================================== */
-.container {
+.SiteContainer {
 	background: {
 		image: url($background-image-jpg);
 		image:
@@ -207,7 +208,7 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 	width: 100%;
 
 	.webp & {
-		// No browser supports webp but not CSS gradients
+		// Ain't no browser that supports webp but not CSS gradients
 		background-image:
 			linear-gradient(to top, $gradient-color, transparent 30%),
 			linear-gradient(to bottom, fade-out(hsl(0, 0%, 90%), .75), fade-out(hsl(0, 0%, 90%), 1) 20%),
@@ -231,17 +232,20 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 
 
 
-.social-links, .site-nav > ul {
-	@include flexbox-container;
-	list-style: none;
+.SocialLinks,
+.SiteNav {
+	> ul {
+		@include flexbox-container;
+		list-style: none;
 
-	> li {
-		@include flex(1);
-		text-align: center;
+		> li {
+			@include flex(1);
+			text-align: center;
+		}
 	}
 }
 
-.wildhart-titles {
+.WildhartTitles {
 	height: 100%;
 	text-align: center;
 	@include position(none none 10% none);
@@ -258,115 +262,68 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 	@media screen and (max-width: $narrower) {
 		font-size: .35em;
 	}
+}
+.WildhartTitles-title {
+	animation: fade2 $transition-duration linear 0s 1;
+	bottom: 4%;
+	font: normal 9em/1 flood-std;
+	height: 17%;
+	text-align: center;
+	text-shadow: 0 0 5px hsl(267, 92%, 77%);
+	transition: {
+		property: bottom, width, margin, z-index;
+		delay: $transition-duration / 2;
+		duration: 0s;
+		timing-function: linear;
+	};
+	position: absolute;
+	width: 100%;
 
-	> div, > h1 {
-		$height: 17%;
-		$width: 63%;
-
-		font: normal 100%/1 flood-std;
-		text-align: center;
-		text-shadow: 0 0 5px hsl(267, 92%, 77%);
-		position: absolute;
-		width: $width;
-
-		$animation-delay: 0s;
-		$bottom: 4%;
-		$font-size: 9em;
-
-		@for $i from 1 to 6 {
-			&.n#{$i} {
-				animation: fade2 $transition-duration linear $animation-delay 1;
-				bottom: $bottom;
-				font-size: $font-size / $i;
-				height: $height / $i;
-				width: 100%;
-
-				$animation-delay: $animation-delay + .075s;
-				$bottom: $bottom + ($height / $i);
-				$font-size: $font-size - ($i / 2.5);
-			}
-		}
-
-		@for $i from 5 to 0 {
-			&.n#{$i} {
-				z-index: $i;
-			}
-		}
-
-		&.n1 {
-			transition: {
-				property: bottom, width, margin, z-index, color;
-				delay: $transition-duration / 2;
-				duration: 0s;
-				timing-function: linear;
-			};
-		}
+	@media screen and (min-width: $narrower) and (max-height: $narrow) {
+		bottom: 17%;
 	}
 }
 
-.contact-container {
+.ContactContainer {
 	top: 45%;
-
-	> div {
-		max-width: 20rem;
-
-		> p {
-			max-width: 20em;
-			margin: 0 auto;
-		}
-	}
+}
+.ContactContainer-contact {
+	max-width: 20rem;
 }
 
-.images-container {
+.ImagesContainer {
 	min-height: 25em;
 	top: 42%;
+}
+.ImagesContainer-content {
+	padding: {
+		bottom: 1em;
+		left: 0;
+		right: 0;
+	};
+	text-align: center;
+}
+.ImagesContainer-images {
+	display: block;
+	max-width: 100%;
+	overflow: hidden;
+	width: 32em;
+}
+.ImagesContainer-imageLink {
+	background-size: cover;
+	background-position: center;
+	border: $border-width solid $border-color;
+	display: inline-block;
+	margin: .25em;
+	padding-bottom: 30%;
+	width: 44.5%;
 
-	> div {
-		padding: {
-			bottom: 1em;
-			left: 0;
-			right: 0;
-		};
-		text-align: center;
-
-		> .images {
-			display: block;
-			max-width: 100%;
-			overflow: hidden;
-			width: 32em;
-
-			.image-link {
-				background-size: cover;
-				background-position: center;
-				border: $border-width solid $border-color;
-				display: inline-block;
-				margin: .25em;
-				padding-bottom: 30%;
-				width: 44.5%;
-
-				&:nth-child(even) {
-					padding-left: 0;
-				}
-			}
-		}
-
-
-		> .close {
-			display: inline-block;
-
-			&:before {
-				content: "";
-				clear: both;
-				display: block;
-			}
-		}
+	&:nth-child(even) {
+		padding-left: 0;
 	}
 }
 
-.contact-container, .images-container {
-	$bg-color: fade-out(hsl(206, 33%, 57%), .5);
-	$bg-gradient: radial-gradient(ellipse at 30% 40% , fade-out($container-bg-color-1, .2), fade-out($container-bg-color-2, .3));
-
+.ContentContainer {
 	font-family: flood-std;
 	opacity: 0;
 	position: absolute;
@@ -396,66 +353,74 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 	}
 
 	@media screen and (max-height: $short) {
-		background-color: $bg-color;
-		background-image: $bg-gradient;
+		background-color: $content-container-bg-color;
+		background-image: $content-container-bg-gradient;
+	}
+}
+.ContentContainer-content {
+	border: $border-width solid $border-color;
+	display: inline-block;
+	margin: 0 auto;
+	padding: 1em;
+	transform: translateY(10em);
+	transition: transform $transition-duration $transition-easing;
+
+	@media screen and (min-height: $short) {
+		background-color: $content-container-bg-color;
+		background-image: $content-container-bg-gradient;
 	}
 
-	> div {
-		border: $border-width solid $border-color;
-		display: inline-block;
-		margin: 0 auto;
-		padding: 1em;
-		transform: translateY(10em);
-		transition: transform $transition-duration $transition-easing;
+	@media screen and (max-width: $narrow) {
+		max-width: 100%;
+	}
 
-		@media screen and (min-height: $short) {
-			background-color: $bg-color;
-			background-image: $bg-gradient;
-		}
+	@media screen and (max-height: $short) {
+		border-width: 0;
+		padding-top: 11em;
+	}
 
-		@media screen and (max-width: $narrow) {
-			max-width: 100%;
-		}
+	@media screen and (max-height: $narrower) {
+		font-size: .85em;
+		padding-top: 10em;
+	}
 
-		@media screen and (max-height: $short) {
-			border-width: 0;
-			padding-top: 11em;
-		}
+	@media screen and (max-width: $middle) and (min-width: $narrow) and (max-height: $short) and (min-height: $narrower) {
+		padding-top: 13em;
+	}
 
-		@media screen and (max-height: $narrower) {
-			font-size: .85em;
-			padding-top: 10em;
-		}
+	@media screen and (min-width: $middle) and (max-height: $short) and (min-height: $narrower) {
+		padding-top: 14.5em;
+	}
+}
+.ContentContainer-paragraph {
+	margin: 0 auto 1em auto;
+	max-width: 20em;
+	text-align: left;
+	width: 90%;
 
-		@media screen and (max-width: $middle) and (min-width: $narrow) and (max-height: $short) and (min-height: $narrower) {
-			padding-top: 13em;
-		}
+	&:last-child {
+		margin-bottom: 0;
+	}
+}
+.ContentContainer-close {
+	display: inline-block;
 
-		@media screen and (max-width: $wide) and (min-width: $middle) and (max-height: $short) and (min-height: $narrower) {
-			padding-top: 14.5em;
-		}
+	&:before {
+		content: "";
+		clear: both;
+		display: block;
+	}
+}
+.ContentContainer-paragraph,
+.ContentContainer-close {
+	font-size: 1.5em;
 
-		> p {
-			margin: 0 auto 1em auto;
-			text-align: left;
-			width: 90%;
+	@media screen and (max-width: $middle) {
+		font-size: 1.2em;
+	}
 
-			&:last-child {
-				margin-bottom: 0;
-			}
-		}
-
-		> p, > a {
-			font-size: 1.5em;
-
-			@media screen and (max-width: $middle) {
-				font-size: 1.2em;
-			}
-
-			@media screen and (max-height: $short) {
-				font-size: 1.2em;
-			}
-		}
+	@media screen and (max-height: $short) {
+		font-size: 1.2em;
 	}
 }
 

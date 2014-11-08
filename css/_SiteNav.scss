@@ -1,0 +1,41 @@
+.SiteNav {
+	@include position(none none 0 none);
+	transition: {
+		duration: $transition-duration, 0;
+		property: opacity, visibility;
+	};
+	width: 100%;
+	z-index: 90;
+
+	@media screen and (min-width: $narrow) {
+		padding: 0 10%;
+	}
+}
+.SiteNav-link {
+	$font-size: 3.5em;
+	$text-shadow: unquote("#{nth($heading-text-shadow-offsets, 1)} 0 #{nth($heading-text-shadow-colors, 1)}");
+
+	@for $i from 2 to (length($heading-text-shadow-colors) + 1) {
+		$text-shadow: append($text-shadow, unquote("#{nth($heading-text-shadow-offsets, $i)} 0 #{nth($heading-text-shadow-colors, $i)}"), comma);
+	}
+
+	border-bottom: 0;
+	color: invert($color);
+	display: block;
+	font: normal $font-size flood-std;
+	line-height: $nav-height / $font-size;
+	padding: .1em 0;
+	text-align: center;
+
+	@media screen and (max-width: $narrower) {
+		font-size: $font-size / 2;
+		line-height: $nav-height / ($font-size / 1.5);
+	}
+}
+.SiteNav-link--images {
+	border-width: $border-width $border-width $border-width/2 $border-width;
+
+	@media screen and (max-width: $narrower) {
+		border-right-width: 0;
+	}
+}
