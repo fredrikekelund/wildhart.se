@@ -164,7 +164,7 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 		@media screen and (max-height: $short) {
 			bottom: 100%;
 			margin-bottom: -16rem;
-			text-shadow: none;
+			// text-shadow: none;
 		}
 
 		@media screen and (max-height: $short - 100px) {
@@ -247,7 +247,7 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 	font: normal 9em/1 flood-std;
 	height: 17%;
 	text-align: center;
-	text-shadow: 0 0 5px hsl(267, 92%, 77%);
+	text-shadow: 0 0 8px hsl(330, 80%, 85%);
 	transition: {
 		property: bottom, width, margin, z-index;
 		delay: $transition-duration / 2;
@@ -370,7 +370,7 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 .ContentContainer-paragraph {
 	margin: 0 auto 1em auto;
 	max-width: 20em;
-	text-align: left;
+	text-align: center;
 	width: 90%;
 
 	&:last-child {
@@ -378,6 +378,7 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 	}
 }
 .ContentContainer-close {
+	border-bottom: 0;
 	display: inline-block;
 
 	&:before {
