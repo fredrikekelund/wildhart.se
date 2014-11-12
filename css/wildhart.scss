@@ -247,7 +247,7 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 	font: normal 9em/1 flood-std;
 	height: 17%;
 	text-align: center;
-	text-shadow: 0 0 8px hsl(330, 80%, 85%);
+	text-shadow: 0 0 15px hsl(330, 85%, 83%);
 	transition: {
 		property: bottom, width, margin, z-index;
 		delay: $transition-duration / 2;
