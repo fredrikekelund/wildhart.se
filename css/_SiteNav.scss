@@ -6,21 +6,24 @@
 	};
 	width: 100%;
 	z-index: 90;
+}
+.SiteNav-linkContainer--left {
+	text-align: right;
 
-	@media screen and (min-width: $narrow) {
-		padding: 0 15%;
+	> .SiteNav-link {
+		padding-right: 1em;
 	}
+}
 
-	@media screen and (min-width: $middle) {
-		padding: 0 18%;
-	}
+.SiteNav-linkContainer--right {
+	text-align: left;
 
-	@media screen and (min-width: $wide) {
-		padding: 0 21%;
+	> .SiteNav-link {
+		padding-left: 1em;
 	}
 }
 .SiteNav-link {
-	$font-size: 2.9em;
+	$font-size: 3em;
 	$text-shadow: unquote("#{nth($heading-text-shadow-offsets, 1)} 0 #{nth($heading-text-shadow-colors, 1)}");
 
 	@for $i from 2 to (length($heading-text-shadow-colors) + 1) {
@@ -33,7 +36,6 @@
 	font: normal $font-size flood-std;
 	line-height: $nav-height / $font-size;
 	padding: .1em 0;
-	text-align: center;
 
 	@media screen and (max-width: $narrower) {
 		font-size: $font-size / 2;
