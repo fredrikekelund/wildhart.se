@@ -33,7 +33,7 @@ $images-bg-color: hsl(59, 86%, 56%);
 $container-bg-color-1: hsl(58, 78%, 96%);
 $container-bg-color-2: $bg-color;
 
-$content-container-bg-color: fade-out(hsl(206, 33%, 57%), .5);
+$content-container-bg-color: fade-out(hsl(58, 78%, 96%), .5);
 $content-container-bg-gradient: radial-gradient(ellipse at 30% 40% , fade-out($container-bg-color-1, .2), fade-out($container-bg-color-2, .3));
 
 $transition-duration: .45s;
