@@ -244,7 +244,7 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 .WildhartTitles-title {
 	animation: fade2 $transition-duration linear 0s 1;
 	bottom: 4%;
-	font: normal 9em/1 flood-std;
+	font: normal 9em/1 impact;
 	height: 17%;
 	text-align: center;
 	text-shadow: 0 0 15px hsl(330, 85%, 83%);
@@ -302,7 +302,7 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 }
 
 .ContentContainer {
-	font-family: flood-std;
+	font-family: impact;
 	opacity: 0;
 	position: absolute;
 	visibility: visible;
@@ -318,7 +318,9 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 	z-index: 10;
 
 	@media screen and (min-height: $short) {
-		font-size: .75em;
+		
+		
+		
 	}
 
 	@media screen and (max-height: $short) {
@@ -355,7 +357,7 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 	}
 
 	@media screen and (max-height: $narrower) {
-		font-size: .85em;
+		font-size: .45em;
 		padding-top: 10em;
 	}
 
@@ -442,6 +444,6 @@ body {
 }
 
 h1, h2, h3 {
-	font-family: flood-std;
+	font-family: impact;
 	font-weight: normal;
 }
