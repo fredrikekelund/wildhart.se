@@ -23,7 +23,7 @@
 	}
 }
 .SiteNav-link {
-	$font-size: 3em;
+	$font-size: 1em;
 	$text-shadow: unquote("#{nth($heading-text-shadow-offsets, 1)} 0 #{nth($heading-text-shadow-colors, 1)}");
 
 	@for $i from 2 to (length($heading-text-shadow-colors) + 1) {
