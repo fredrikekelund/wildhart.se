@@ -18,6 +18,7 @@ $border-width: 2px;
 
 $background-image-jpg: "/img/wildhart.large-2.jpg";
 $background-image-webp: "/img/wildhart.large-2.webp";
+$order-img: "/img/order.optim.png";
 
 $color: black;
 $border-color: fade-out(white, .7);
@@ -89,7 +90,7 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 	filter: $function;
 }
 
-@mixin fade {
+@keyframes fade {
 	0% {
 		opacity: 1;
 	}
@@ -104,22 +105,49 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 	}
 }
 
-@keyframes fade {
-	@include fade;
+@keyframes glitch {
+	0%, 10% {
+		opacity: 1;
+	}
+	11%, 12% {
+		opacity: 0;
+	}
+	15% {
+		opacity: 0.5;
+	}
+	16% {
+		opacity: 0;
+	}
+	18%, 75% {
+		opacity: 1;
+	}
+	76% {
+		opacity: 0;
+	}
+	77% {
+		opacity: 1;
+	}
+	78% {
+		opacity: .2;
+	}
+	79% {
+		opacity: .9;
+	}
+	80% {
+		opacity: .1;
+	}
+	81%, 100% {
+		opacity: 1;
+	}
 }
 
-@keyframes fade2 {
-	@include fade;
-}
 
 
 
 /* ==========================================================================
    @imports
    ========================================================================== */
-@import "position";
 @import "flexbox";
-
 @import "SiteNav";
 @import "SocialLinks";
 
@@ -129,20 +157,27 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
    ID selectors
    ========================================================================== */
 #contact:target ~ .SiteContainer {
-	.ContactContainer {
+	.Popup--contact {
 		@include targeted-container;
 	}
 }
 
 #images:target ~ .SiteContainer {
-	.ImagesContainer {
+	.Popup--images {
+		@include targeted-container;
+	}
+}
+
+#shows:target ~ .SiteContainer {
+	.Popup--shows {
 		@include targeted-container;
 	}
 }
 
 #contact:target ~ .SiteContainer,
-#images:target ~ .SiteContainer {
-	@media screen and (max-height: $short) {
+#images:target ~ .SiteContainer,
+#shows:target ~ .SiteContainer {
+	@media (max-height: $short) {
 		.SocialLinks {
 			background-color: fade-out(white, 1);
 		}
@@ -154,6 +189,12 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 		}
 	}
 
+	.OrderLink {
+		opacity: 0;
+		transition-delay: 0s, $transition-duration / 2;
+		visibility: hidden;
+	}
+
 	.WildhartTitles-title {
 		animation: fade $transition-duration linear 0s 1;
 		bottom: 55%;
@@ -161,25 +202,25 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 		opacity: 1;
 		z-index: 100;
 
-		@media screen and (max-height: $short) {
+		@media (max-height: $short) {
 			bottom: 100%;
 			margin-bottom: -16rem;
 			// text-shadow: none;
 		}
 
-		@media screen and (max-height: $short - 100px) {
+		@media (max-height: $short - 100px) {
 			margin-bottom: -14rem;
 		}
 
-		@media screen and (max-height: $narrower) {
+		@media (max-height: $narrower) {
 			margin-bottom: -12rem;
 		}
 
-		@media screen and (max-height: $narrower - 75px) {
+		@media (max-height: $narrower - 75px) {
 			margin-bottom: -10.5rem;
 		}
 
-		@media screen and (max-height: $narrower) and (min-width: $narrower - 50px) {
+		@media (max-height: $narrower) and (min-width: $narrower - 50px) {
 			margin-bottom: -10.75rem;
 		}
 	}
@@ -215,79 +256,185 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 			url($background-image-webp);
 	}
 }
-.SiteHeader {
-	@include position(0 none none none);
-	width: 100%;
+.Header {
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 23em;
 	z-index: 90;
 }
 
 
 
 .WildhartTitles {
+	bottom: 10%;
 	height: 100%;
+	position: absolute;
 	text-align: center;
-	@include position(none none 10% none);
 	width: 100%;
 
-	@media screen and (max-width: $middle) {
+	@media (max-width: $middle) {
 		font-size: .85em;
 	}
 
-	@media screen and (max-width: $narrow) {
+	@media (max-width: $narrow) {
 		font-size: .7em;
 	}
 
-	@media screen and (max-width: $narrower) {
+	@media (max-width: $narrower) {
 		font-size: .35em;
 	}
 }
 .WildhartTitles-title {
-	animation: fade2 $transition-duration linear 0s 1;
+	animation: fade $transition-duration linear 0s 1;
 	bottom: 4%;
 	font: normal 2em/1 futura;
 	height: 17%;
 	text-align: center;
 	text-shadow: 0 0 15px hsl(330, 85%, 83%);
-	transition: {
-		property: bottom, width, margin, z-index;
-		delay: $transition-duration / 2;
-		duration: 0s;
-		timing-function: linear;
-	};
+	transition-property: bottom, width, margin, z-index;
+	transition-delay: $transition-duration / 2;
+	transition-duration: 0s;
+	transition-timing-function: linear;
 	position: absolute;
 	width: 100%;
 
-	@media screen and (min-width: $narrower) and (max-height: $narrow) {
+	@media (min-width: $narrower) and (max-height: $narrow) {
 		bottom: 17%;
 	}
 }
 
-.ContactContainer {
-	top: 45%;
+.Popup {
+	opacity: 0;
+	position: absolute;
+	text-align: center;
+	top: 50%;
+	transition-delay: 0s, 0s, $transition-duration;
+	transition-duration: $transition-duration;
+	transition-property: transform, opacity, visibility;
+	transition-timing-function: $transition-easing;
+	transform: translateY(-45%);
+	visibility: hidden;
+	width: 100%;
+	z-index: 10;
+
+	@media (max-height: $short) {
+		background-color: $content-container-bg-color;
+		background-image: $content-container-bg-gradient;
+		height: 100%;
+		top: 0;
+	}
+	@media (max-width: $narrow) {
+		transform: none;
+	}
 }
-.ContactContainer-contact {
+.Popup-content {
+	border: $border-width solid $border-color;
+	display: inline-block;
+	margin: 0 auto;
+	padding: 1em;
+	transform: translateY(10em);
+	transition: transform $transition-duration $transition-easing;
+
+	@media (min-height: $short) {
+		background-color: $content-container-bg-color;
+		background-image: $content-container-bg-gradient;
+	}
+
+	@media (max-width: $narrow) {
+		max-width: 100%;
+	}
+
+	@media (max-height: $short) {
+		border-width: 0;
+		height: 100%;
+		padding-top: 11em;
+	}
+
+	@media (max-height: $narrower) {
+		font-size: .45em;
+		padding-top: 10em;
+	}
+
+	@media (max-width: $middle) and (min-width: $narrow) and (max-height: $short) and (min-height: $narrower) {
+		padding-top: 13em;
+	}
+
+	@media (min-width: $middle) and (max-height: $short) and (min-height: $narrower) {
+		padding-top: 14.5em;
+	}
+}
+.Popup-paragraph,
+.Popup-close {
+	font-size: 1.5em;
+
+	@media (max-width: $middle) {
+		font-size: 1.2em;
+	}
+	@media (max-height: $short) {
+		font-size: 1.2em;
+	}
+}
+.Popup-paragraph {
+	font-family: impact;
+	margin: 0 auto;
+	max-width: 20em;
+	text-align: center;
+
+	& + & {
+		margin-top: 1em;
+	}
+
+	&:last-child {
+		margin-bottom: 0;
+	}
+}
+.Popup-close {
+	border-bottom: 0;
+	display: inline-block;
+	margin-top: 1em;
+	transition-property: color, text-shadow;
+	transition-duration: $transition-duration / 2;
+	transition-timing-function: linear;
+
+	&:hover {
+		color: desaturate(darken($bg-color, 45%), 70%);
+		text-shadow:
+			0 0 1em white,
+			0 0 1em $bg-color,
+			0 0 1em white,
+			0 0 1em $bg-color,
+			0 0 1em white,
+			0 0 1em $bg-color;
+	}
+
+	&:before {
+		content: "";
+		clear: both;
+		display: block;
+	}
+}
+
+.Popup-content--contact {
 	max-width: 20rem;
 }
 
-.ImagesContainer {
+.Popup--images {
 	min-height: 25em;
-	top: 42%;
 }
-.ImagesContainer-content {
-	padding: {
-		bottom: 1em;
-		left: 0;
-		right: 0;
-	};
+.Popup-content--images {
+	padding-bottom: 1em;
+	padding-left: 0;
+	padding-right: 0;
 	text-align: center;
 }
-.ImagesContainer-images {
+.Popup-images {
 	display: block;
 	max-width: 100%;
 	overflow: hidden;
 	width: 32em;
 }
-.ImagesContainer-imageLink {
+.Popup-imageLink {
 	background-size: cover;
 	background-position: center;
 	border: $border-width solid $border-color;
@@ -301,106 +448,43 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 	}
 }
 
-.ContentContainer {
-	font-family: impact;
-	opacity: 0;
+.Popup-content--shows {
+	max-width: 20rem;
+}
+
+.OrderLink {
+	$dimensions: 12em;
+
+	animation-name: glitch;
+	animation-duration: 15s;
+	animation-timing-function: linear;
+	animation-iteration-count: infinite;
+	background-image: url($order-img);
+	background-repeat: no-repeat;
+	background-size: contain;
+	border: 0;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	display: block;
+	height: $dimensions;
 	position: absolute;
-	visibility: visible;
-	text-align: center;
-	transition: {
-		property: transform, opacity, visibility;
-		delay: 0s, 0s, $transition-duration;
-		duration: $transition-duration;
-		timing-function: $transition-easing;
-	}
-	visibility: hidden;
-	width: 100%;
-	z-index: 10;
+	top: 68%;
+	transition-duration: $transition-duration / 2, 0s;
+	transition-property: opacity, visibility;
+	transition-timing-function: linear;
+	width: $dimensions;
 
-	@media screen and (min-height: $short) {
-		
-		
-		
+	@media (max-width: $narrow) {
+		height: $dimensions * 0.8;
+		top: 64%;
+		width: $dimensions * 0.8;
 	}
-
-	@media screen and (max-height: $short) {
-		height: 100%;
-		top: 0;
-	}
-
-	@media screen and (max-height: $short) {
-		background-color: $content-container-bg-color;
-		background-image: $content-container-bg-gradient;
+	@media (max-height: $narrow) {
+		top: 50%;
 	}
 }
-.ContentContainer-content {
-	border: $border-width solid $border-color;
-	display: inline-block;
-	margin: 0 auto;
-	padding: 1em;
-	transform: translateY(10em);
-	transition: transform $transition-duration $transition-easing;
 
-	@media screen and (min-height: $short) {
-		background-color: $content-container-bg-color;
-		background-image: $content-container-bg-gradient;
-	}
 
-	@media screen and (max-width: $narrow) {
-		max-width: 100%;
-	}
-
-	@media screen and (max-height: $short) {
-		border-width: 0;
-		height: 100%;
-		padding-top: 11em;
-	}
-
-	@media screen and (max-height: $narrower) {
-		font-size: .45em;
-		padding-top: 10em;
-	}
-
-	@media screen and (max-width: $middle) and (min-width: $narrow) and (max-height: $short) and (min-height: $narrower) {
-		padding-top: 13em;
-	}
-
-	@media screen and (min-width: $middle) and (max-height: $short) and (min-height: $narrower) {
-		padding-top: 14.5em;
-	}
-}
-.ContentContainer-paragraph {
-	margin: 0 auto 1em auto;
-	max-width: 20em;
-	text-align: center;
-	width: 90%;
-
-	&:last-child {
-		margin-bottom: 0;
-	}
-}
-.ContentContainer-close {
-	border-bottom: 0;
-	display: inline-block;
-
-	&:before {
-		content: "";
-		clear: both;
-		display: block;
-	}
-}
-.ContentContainer-paragraph,
-.ContentContainer-close {
-	font-size: 1.5em;
-
-	@media screen and (max-width: $middle) {
-		font-size: 1.2em;
-	}
-
-	@media screen and (max-height: $short) {
-		font-size: 1.2em;
-	}
-}
 
 .u-flexbox {
 	@include flexbox-container;
@@ -432,6 +516,13 @@ a {
 	text-decoration: none;
 }
 
+:root,
+html {
+	font-size: 16px;
+	line-height: 1.5;
+	font-family: 'Pinyon Script', impact, sans-serif;
+}
+
 body, html {
 	height: 400px;
 	min-height: 100%;
@@ -440,10 +531,8 @@ body, html {
 body {
 	background-color: $bg-color;
 	color: $color;
-	font: 16px/1.5 myriad-pro, arial, sans-serif;
 }
 
 h1, h2, h3 {
-	font-family: impact;
 	font-weight: normal;
 }

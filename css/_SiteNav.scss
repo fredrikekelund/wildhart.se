@@ -1,29 +1,15 @@
 .SiteNav {
-	@include position(none none 0 none);
-	transition: {
-		duration: $transition-duration, 0;
-		property: opacity, visibility;
-	};
+	@include flexbox-container;
+	bottom: 0.5em;
+	flex-wrap: wrap;
+	position: absolute;
+	transition-duration: $transition-duration, 0;
+	transition-property: opacity, visibility;
 	width: 100%;
 	z-index: 90;
 }
-.SiteNav-linkContainer--left {
-	text-align: right;
-
-	> .SiteNav-link {
-		padding-right: 1em;
-	}
-}
-
-.SiteNav-linkContainer--right {
-	text-align: left;
-
-	> .SiteNav-link {
-		padding-left: 1em;
-	}
-}
 .SiteNav-link {
-	$font-size: 1em;
+	$font-size: 2em;
 	$text-shadow: unquote("#{nth($heading-text-shadow-offsets, 1)} 0 #{nth($heading-text-shadow-colors, 1)}");
 
 	@for $i from 2 to (length($heading-text-shadow-colors) + 1) {
@@ -33,19 +19,39 @@
 	border-bottom: 0;
 	color: black;
 	display: block;
-	font: normal $font-size impact;
+	font-size: $font-size;
 	line-height: $nav-height / $font-size;
+	outline: 0;
 	padding: .1em 0;
+	text-align: center;
+	transition-property: color, text-shadow;
+	transition-duration: $transition-duration / 2;
+	transition-timing-function: linear;
 
-	@media screen and (max-width: $narrower) {
-		font-size: $font-size / 2;
-		line-height: $nav-height / ($font-size / 1.5);
+	&:hover {
+		color: $bg-color;
+		text-shadow:
+			0 0 0.75em white,
+			0 0 0.75em $bg-color,
+			0 0 0.75em white,
+			0 0 0.75em $bg-color,
+			0 0 0.75em white,
+			0 0 0.75em $bg-color;
+	}
+
+	@media (min-width: $narrower + 1px) {
+		@include flex;
+	}
+
+	@media (max-width: $narrower) {
+		font-size: $font-size * 0.85;
+		width: 50%;
 	}
 }
 .SiteNav-link--images {
 	border-width: $border-width $border-width $border-width/2 $border-width;
 
-	@media screen and (max-width: $narrower) {
+	@media (max-width: $narrower) {
 		border-right-width: 0;
 	}
 }

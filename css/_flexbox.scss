@@ -13,7 +13,7 @@
 	display: flex;
 }
 
-@mixin flex ($flex) {
+@mixin flex ($flex: 1) {
 	-webkit-box-flex: $flex;
 
 	-ms-flex: $flex;

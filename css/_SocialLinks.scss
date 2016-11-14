@@ -1,16 +1,19 @@
+$height-modifier: 0.65;
+
 .SocialLinks {
+	@include flexbox-container;
 	padding-top: 2em;
 
-	@media screen and (max-width: $narrow) {
+	@media (max-width: $narrow) {
 		height: $nav-height / 1.8;
 		padding-top: 1em;
 	}
-
-	@media screen and (max-height: $short) {
-		padding-top: .5em;
-	}
 }
-.SocialLink {
+.SocialLinks-wrapper {
+	@include flex;
+	text-align: center;
+}
+.SocialLinks-link {
 	$font-size: 2.5em;
 
 	background: url("/img/icons/sprite.png") top left no-repeat;
@@ -20,26 +23,24 @@
 	font-size: .6em;
 	overflow: hidden;
 	text-indent: 100%;
-	transition: {
-		duration: .2s;
-		property: filter, -moz-filter, -webkit-filter;
-		timing-function: linear;
-	};
-	width: 8.3125em;
+	transition-duration: .2s;
+	transition-property: filter, -moz-filter, -webkit-filter;
+	transition-timing-function: linear;
+	width: 8.3125em * $height-modifier;
 
 	&:hover {
 		@include filter(invert(20%));
 	}
 
-	@media screen and (max-width: $narrow) {
+	@media (max-width: $narrow) {
 		font-size: .45em;
 	}
 
-	@media screen and (max-height: $narrow) {
+	@media (max-height: $narrow) {
 		font-size: .45em;
 	}
 
-	@media screen and (max-width: $narrower) {
+	@media (max-width: $narrower) {
 		font-size: .375em;
 	}
 
@@ -47,30 +48,30 @@
 		background-image: url("/img/icons/sprite.webp");
 	}
 }
-.SocialLink--youtube {
+.SocialLinks-link--youtube {
 	$youtube-color: lighten(hsl(358, 79%, 45%), 5%);
 
 	background-position: 50.538% 92.174%;
-	height: 5em;
+	height: 5em * $height-modifier;
 }
 
-.SocialLink--soundcloud {
+.SocialLinks-link--soundcloud {
 	$soundcloud-color: lighten(hsl(28, 100%, 50%), 5%);
 
 	background-position: 50% 37.66%;
-	height: 4.375em;
+	height: 4.375em * $height-modifier;
 }
 
-.SocialLink--spotify {
+.SocialLinks-link--spotify {
 	$spotify-color: hsl(90, 55%, 37%);
 
 	background-position: 50% 63.913%;
-	height: 5em;
+	height: 5em * $height-modifier;
 }
 
-.SocialLink--facebook {
+.SocialLinks-link--facebook {
 	$facebook-color: hsl(221, 45%, 37%);
 
 	background-position: 50% 7.273%;
-	height: 6.25em;
+	height: 6.25em * $height-modifier;
 }

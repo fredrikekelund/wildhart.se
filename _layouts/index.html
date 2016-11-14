@@ -1,54 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
-	{% include header.html %}
+	{% include head.html %}
 
 	<body>
 		<div id="about"></div>
 		<div id="contact"></div>
 		<div id="images"></div>
+		<div id="shows"></div>
 
 		<section class="SiteContainer">
-			<header class="SiteHeader">
+			<header class="Header">
 				<nav class="SocialLinks">
-					<ul class="u-plainList u-flexbox">
-						<li class="u-flex u-center"><a class="SocialLink SocialLink--youtube" href="https://www.youtube.com/results?search_query=wildhart" target="_blank">YouTube</a></li>
-						<li class="u-flex u-center"><a class="SocialLink SocialLink--soundcloud" href="https://soundcloud.com/wildhart" target="_blank">Soundcloud</a></li>
-						<li class="u-flex u-center"><a class="SocialLink SocialLink--spotify" href="https://open.spotify.com/artist/5FTUVQzJDLW4MBP1vvKRc1" target="_blank">Spotify</a></li>
-						<li class="u-flex u-center"><a class="SocialLink SocialLink--facebook" href="https://facebook.com/wildhartmusic" target="_blank">Facebook</a></li>
-					</ul>
+
+					<div class="SocialLinks-wrapper">
+						<a class="SocialLinks-link SocialLinks-link--youtube" href="https://www.youtube.com/results?search_query=wildhart" target="_blank">YouTube</a>
+					</div>
+
+					<div class="SocialLinks-wrapper">
+						<a class="SocialLinks-link SocialLinks-link--soundcloud" href="https://soundcloud.com/wildhart" target="_blank">Soundcloud</a>
+					</div>
+
+					<div class="SocialLinks-wrapper">
+						<a class="SocialLinks-link SocialLinks-link--spotify" href="https://open.spotify.com/artist/5FTUVQzJDLW4MBP1vvKRc1" target="_blank">Spotify</a>
+					</div>
+
+					<div class="SocialLinks-wrapper">
+						<a class="SocialLinks-link SocialLinks-link--facebook" href="https://facebook.com/wildhartmusic" target="_blank">Facebook</a>
+					</div>
+
 				</nav>
 			</header>
 
-			<nav class="SiteNav">
-				<ul class="u-plainList u-flexbox">
-					<li class="u-flex SiteNav-linkContainer--left">
-						<a class="SiteNav-link SiteNav-link--contact" href="#contact">Contact</a>
-					</li>
-					<li class="u-flex SiteNav-linkContainer--right">
-						<a class="SiteNav-link SiteNav-link--images" href="#images">images</a>
-					</li>
-				</ul>
+			<nav class="SiteNav" role="navigation">
+				<a class="SiteNav-link SiteNav-link--shows" href="#shows">Shows</a>
+				<a class="SiteNav-link SiteNav-link--contact" href="#contact">Contact</a>
+				<a class="SiteNav-link SiteNav-link--images" href="#images">Images</a>
 			</nav>
 
-			<div class="ContentContainer ContactContainer">
-				<div class="ContentContainer-content ContactContainer-contact">
+			<div class="Popup Popup--contact">
+				<div class="Popup-content Popup-content--contact">
 					{% for paragraph in site.data.contact %}
-						<p class="ContentContainer-paragraph">{{ paragraph }}</p>
+						<p class="Popup-paragraph">{{ paragraph }}</p>
 					{% endfor %}
-					<a class="ContentContainer-close" href="#">Close</a>
+
+					<a class="Popup-close" href="#">Close</a>
 				</div>
 			</div>
 
-			<div class="ContentContainer ImagesContainer">
-				<div class="ContentContainer-content ImagesContainer-container">
-					<div class="ImagesContainer-images">
+			<div class="Popup Popup--images">
+				<div class="Popup-content Popup-content--images">
+					<div class="Popup-images">
 						{% for image in site.data.images %}
-							<a class="ImagesContainer-imageLink" href="{{ image.url }}" style="background-image: url('{{ image.thumburl }}')"></a>
+							<a class="Popup-imageLink" href="{{ image.url }}" style="background-image: url('{{ image.thumburl }}')"></a>
 						{% endfor %}
 					</div>
-					<a class="ContentContainer-close" href="#">Close</a>
+
+					<a class="Popup-close" href="#">Close</a>
 				</div>
 			</div>
+
+			<div class="Popup Popup--shows">
+				<div class="Popup-content Popup-content--shows">
+					<a href="http://www.bandsintown.com/wildhart" class="bit-widget-initializer" data-artist="wildhart" data-prefix="fbjs">wildhart Tour Dates</a>
+
+					<a class="Popup-close" href="#">Close</a>
+				</div>
+			</div>
+
+			<a class="OrderLink" href="https://gaphals.bandcamp.com/album/wildhart-shine"></a>
 
 		</section>
 
