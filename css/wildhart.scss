@@ -20,8 +20,12 @@ $background-image-jpg: "/img/wildhart.large-2.jpg";
 $background-image-webp: "/img/wildhart.large-2.webp";
 $order-img: "/img/order.optim.png";
 
+$font-family-alternate: caslon, georgia, serif;
+$font-family-main: 'Pinyon Script', impact, sans-serif;
+
 $color: black;
 $border-color: fade-out(white, .7);
+$link-border-color: fade-out($color, .5);
 $social-links-bg-color: fade-out(white, .5);
 $heading-text-shadow-colors: hsl(335, 86%, 26%), hsl(225, 86%, 56%), hsl(60, 100%, 50%);
 $heading-text-shadow-offsets: 0 2px, -1px -1px, -3px 3px;
@@ -157,6 +161,12 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 /* ==========================================================================
    ID selectors
    ========================================================================== */
+#press:target ~ .SiteContainer {
+	.Popup--press {
+		@include targeted-container;
+	}
+}
+
 #contact:target ~ .SiteContainer {
 	.Popup--contact {
 		@include targeted-container;
@@ -175,6 +185,7 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 	}
 }
 
+#press:target ~ .SiteContainer,
 #contact:target ~ .SiteContainer,
 #images:target ~ .SiteContainer,
 #shows:target ~ .SiteContainer {
@@ -340,7 +351,7 @@ a {
 html {
 	font-size: 16px;
 	line-height: 1.5;
-	font-family: 'Pinyon Script', impact, sans-serif;
+	font-family: $font-family-main;
 }
 
 body, html {

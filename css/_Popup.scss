@@ -19,9 +19,6 @@
 		top: 0;
 		transform: none;
 	}
-	@media (max-width: $narrow) {
-		transform: none;
-	}
 }
 .Popup-content {
 	border: $border-width solid $border-color;
@@ -54,7 +51,6 @@
 	}
 
 	@media (max-height: $narrower) {
-		font-size: .45em;
 		padding-top: 10em;
 	}
 
@@ -70,10 +66,25 @@
 .Popup-content--contact {
 	max-width: 30em;
 }
+.Popup-content--contact {
+	@include flexbox-container;
+	@include flex-direction(column);
+
+	min-height: 18em;
+	max-width: 100%;
+	width: 28em;
+}
+.Popup-textWrapper {
+	@include flex;
+	@include flexbox-container;
+	@include flex-direction(column);
+
+	@media (min-height: $short) {
+		@include justify-content(center);
+	}
+}
+.Popup-content--press,
 .Popup-content--images {
-	padding-bottom: 1em;
-	padding-left: 0;
-	padding-right: 0;
 	text-align: center;
 	width: 40em;
 
@@ -90,8 +101,10 @@
 	}
 }
 .Popup-paragraph {
+	font-size: 1em;
+	font-family: $font-family-alternate;
 	margin: 0 auto;
-	max-width: 20em;
+	max-width: 25em;
 	text-align: center;
 
 	& + & {
@@ -99,9 +112,7 @@
 	}
 
 	a {
-		$border-color: fade-out($color, .5);
-
-		background-image: linear-gradient(to bottom, $border-color, $border-color);
+		background-image: linear-gradient(to bottom, $link-border-color, $link-border-color);
 		background-repeat: no-repeat;
 		background-size: 100% 1px;
 		background-position: center 1em;
@@ -136,15 +147,28 @@
 		display: block;
 	}
 }
+.Popup-images {
+	overflow: hidden;
+}
+.Popup-imageWrapper {
+	float: left;
+	width: 50%;
 
+	&:nth-child(odd) .Popup-imageLink {
+		margin-left: 0;
+	}
+	&:nth-child(even) .Popup-imageLink {
+		margin-right: 0;
+	}
+}
 .Popup-imageLink {
 	background-size: cover;
 	background-position: center;
 	border: $border-width solid $border-color;
-	display: inline-block;
-	margin: .25em;
-	padding-bottom: 30%;
-	width: 44.5%;
+	display: block;
+	height: 0;
+	margin: .5em;
+	padding-bottom: 66.666%;
 
 	&:nth-child(even) {
 		padding-left: 0;
@@ -152,8 +176,8 @@
 }
 
 .bit-widget-container {
-	font-family: inherit !important;
-	font-size: 1.5em !important;
+	font-family: $font-family-alternate !important;
+	font-size: 1em !important;
 }
 .bit-events,
 .bit-venue,
@@ -166,4 +190,10 @@
 #bit-events tr.no-dates td {
 	padding-bottom: 1em !important;
 	padding-top: 1em !important;
+}
+#bit-events table a {
+	background-image: linear-gradient(to bottom, $link-border-color, $link-border-color);
+	background-repeat: no-repeat;
+	background-size: 100% 1px;
+	background-position: center 1em;
 }
