@@ -41,11 +41,31 @@
 
 			<div class="Popup Popup--press">
 				<div class="Popup-content Popup-content--press">
-					{% for excerpt in site.data.press %}
-						<p class="Popup-paragraph">
-							{{ excerpt.quote }}<br>
-							&ndash; <a href="{{ excerpt.source_url }}">{{ excerpt.source_title }}</a>
-						</p>
+
+					{% for section in site.data.press %}
+						<div class="Popup-section">
+							<h2 class="Popup-heading">
+								{{ section.title }}
+							</h2>
+
+							{% if section.text %}
+								<div class="Popup-markdown">
+									{{ section.text | markdownify }}
+								</div>
+							{% endif %}
+
+							{% for excerpt in section.excerpts %}
+								<p class="Popup-paragraph">
+									{% if excerpt.quote %}
+										{{ excerpt.quote }}<br>
+										&ndash;
+									{% else %}
+										&bull;&thinsp;
+									{% endif %}
+									<a href="{{ excerpt.source_url }}">{{ excerpt.source_title }}</a>
+								</p>
+							{% endfor %}
+						</div>
 					{% endfor %}
 
 					<a class="Popup-close" href="#">Close</a>

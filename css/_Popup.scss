@@ -74,15 +74,6 @@
 	max-width: 100%;
 	width: 28em;
 }
-.Popup-textWrapper {
-	@include flex;
-	@include flexbox-container;
-	@include flex-direction(column);
-
-	@media (min-height: $short) {
-		@include justify-content(center);
-	}
-}
 .Popup-content--press,
 .Popup-content--images {
 	text-align: center;
@@ -92,6 +83,28 @@
 		padding-top: 6em;
 	}
 }
+.Popup-textWrapper {
+	@include flex;
+	@include flexbox-container;
+	@include flex-direction(column);
+
+	@media (min-height: $short) {
+		@include justify-content(center);
+	}
+}
+.Popup-section {
+	margin-bottom: 2em;
+
+	& + & {
+		border-top: 1px solid mix(black, fade-in($content-container-bg-color, 1), 20%);
+		padding-top: 2em;
+	}
+}
+.Popup-heading {
+	font-size: 2em;
+	line-height: 1;
+	margin-bottom: 1em;
+}
 .Popup-paragraph,
 .Popup-close {
 	font-size: 1.5em;
@@ -100,30 +113,33 @@
 		font-size: 1.35em;
 	}
 }
+.Popup-markdown p,
 .Popup-paragraph {
-	font-size: 1em;
 	font-family: $font-family-alternate;
-	margin: 0 auto;
+	font-size: 1em;
+	margin: 1em auto 0 auto;
 	max-width: 25em;
 	text-align: center;
-
-	& + & {
-		margin-top: 1em;
-	}
 
 	a {
 		background-image: linear-gradient(to bottom, $link-border-color, $link-border-color);
 		background-repeat: no-repeat;
 		background-size: 100% 1px;
 		background-position: center 1em;
+		transition: opacity .2s linear;
+
+		&:hover {
+			opacity: .6;
+		}
 	}
 
-	&:last-child {
+	&:first-child {
 		margin-bottom: 0;
 	}
 }
 .Popup-close {
 	display: inline-block;
+	line-height: 1;
 	margin-bottom: 1em;
 	margin-top: 1em;
 	transition-property: color, text-shadow;
