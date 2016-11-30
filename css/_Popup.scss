@@ -69,7 +69,6 @@
 .Popup-content--contact {
 	@include flexbox-container;
 	@include flex-direction(column);
-
 	min-height: 18em;
 	max-width: 100%;
 	width: 28em;
@@ -105,16 +104,7 @@
 	line-height: 1;
 	margin-bottom: 1em;
 }
-.Popup-paragraph,
-.Popup-close {
-	font-size: 1.5em;
-
-	@media (max-width: $narrow) {
-		font-size: 1.35em;
-	}
-}
-.Popup-markdown p,
-.Popup-paragraph {
+.Popup-content p {
 	font-family: $font-family-alternate;
 	font-size: 1em;
 	margin: 1em auto 0 auto;
@@ -139,6 +129,7 @@
 }
 .Popup-close {
 	display: inline-block;
+	font-size: 1.5em;
 	line-height: 1;
 	margin-bottom: 1em;
 	margin-top: 1em;

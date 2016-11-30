@@ -45,6 +45,7 @@
 
 	@media (max-width: $narrower) {
 		font-size: $font-size * 0.85;
+		line-height: inherit;
 		width: 50%;
 	}
 }
