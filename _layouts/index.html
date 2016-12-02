@@ -7,6 +7,7 @@
 		<div id="contact"></div>
 		<div id="images"></div>
 		<div id="shows"></div>
+		<div id="press"></div>
 
 		<section class="SiteContainer">
 			<header class="Header">
@@ -32,28 +33,40 @@
 			</header>
 
 			<nav class="SiteNav" role="navigation">
+				<a class="SiteNav-link SiteNav-link--press" href="#press">Press</a>
 				<a class="SiteNav-link SiteNav-link--shows" href="#shows">Shows</a>
 				<a class="SiteNav-link SiteNav-link--contact" href="#contact">Contact</a>
 				<a class="SiteNav-link SiteNav-link--images" href="#images">Images</a>
 			</nav>
 
-			<div class="Popup Popup--contact">
-				<div class="Popup-content Popup-content--contact">
-					{% for paragraph in site.data.contact %}
-						<p class="Popup-paragraph">{{ paragraph }}</p>
+			<div class="Popup Popup--press">
+				<div class="Popup-content Popup-content--press">
+
+					{% for section in site.data.press %}
+						<div class="Popup-section">
+							<h2 class="Popup-heading">
+								{{ section.title }}
+							</h2>
+
+							{% if section.text %}
+								<div class="Popup-markdown">
+									{{ section.text | markdownify }}
+								</div>
+							{% endif %}
+
+							{% for excerpt in section.excerpts %}
+								<p>
+									{% if excerpt.quote %}
+										{{ excerpt.quote }}<br>
+										&ndash;
+									{% else %}
+										&bull;&thinsp;
+									{% endif %}
+									<a href="{{ excerpt.source_url }}">{{ excerpt.source_title }}</a>
+								</p>
+							{% endfor %}
+						</div>
 					{% endfor %}
-
-					<a class="Popup-close" href="#">Close</a>
-				</div>
-			</div>
-
-			<div class="Popup Popup--images">
-				<div class="Popup-content Popup-content--images">
-					<div class="Popup-images">
-						{% for image in site.data.images %}
-							<a class="Popup-imageLink" href="{{ image.url }}" style="background-image: url('{{ image.thumburl }}')"></a>
-						{% endfor %}
-					</div>
 
 					<a class="Popup-close" href="#">Close</a>
 				</div>
@@ -61,7 +74,37 @@
 
 			<div class="Popup Popup--shows">
 				<div class="Popup-content Popup-content--shows">
-					<a href="http://www.bandsintown.com/wildhart" class="bit-widget-initializer" data-artist="wildhart" data-prefix="fbjs">wildhart Tour Dates</a>
+					<div class="Popup-textWrapper">
+						<a href="http://www.bandsintown.com/wildhart" class="bit-widget-initializer" data-artist="wildhart" data-prefix="fbjs">wildhart Tour Dates</a>
+					</div>
+
+					<a class="Popup-close" href="#">Close</a>
+				</div>
+			</div>
+
+			<div class="Popup Popup--contact">
+				<div class="Popup-content Popup-content--contact">
+					<div class="Popup-textWrapper Popup-textWrapper--center">
+						{% for paragraph in site.data.contact %}
+							<p>{{ paragraph }}</p>
+						{% endfor %}
+					</div>
+
+					<div>
+						<a class="Popup-close" href="#">Close</a>
+					</div>
+				</div>
+			</div>
+
+			<div class="Popup Popup--images">
+				<div class="Popup-content Popup-content--images">
+					<div class="Popup-images">
+						{% for image in site.data.images %}
+							<div class="Popup-imageWrapper">
+								<a class="Popup-imageLink" href="{{ image.url }}" style="background-image: url('{{ image.thumburl }}')"></a>
+							</div>
+						{% endfor %}
+					</div>
 
 					<a class="Popup-close" href="#">Close</a>
 				</div>
@@ -69,6 +112,7 @@
 
 			<a class="OrderLink" href="https://gaphals.bandcamp.com/album/wildhart-shine">
 				<div class="OrderLink-image"></div>
+				<div class="OrderLink-background"></div>
 			</a>
 
 		</section>
