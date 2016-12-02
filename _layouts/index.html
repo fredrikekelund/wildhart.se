@@ -55,7 +55,7 @@
 							{% endif %}
 
 							{% for excerpt in section.excerpts %}
-								<p class="Popup-paragraph">
+								<p>
 									{% if excerpt.quote %}
 										{{ excerpt.quote }}<br>
 										&ndash;
@@ -72,15 +72,27 @@
 				</div>
 			</div>
 
-			<div class="Popup Popup--contact">
-				<div class="Popup-content Popup-content--contact">
+			<div class="Popup Popup--shows">
+				<div class="Popup-content Popup-content--shows">
 					<div class="Popup-textWrapper">
-						{% for paragraph in site.data.contact %}
-							<p class="Popup-paragraph">{{ paragraph }}</p>
-						{% endfor %}
+						<a href="http://www.bandsintown.com/wildhart" class="bit-widget-initializer" data-artist="wildhart" data-prefix="fbjs">wildhart Tour Dates</a>
 					</div>
 
 					<a class="Popup-close" href="#">Close</a>
+				</div>
+			</div>
+
+			<div class="Popup Popup--contact">
+				<div class="Popup-content Popup-content--contact">
+					<div class="Popup-textWrapper Popup-textWrapper--center">
+						{% for paragraph in site.data.contact %}
+							<p>{{ paragraph }}</p>
+						{% endfor %}
+					</div>
+
+					<div>
+						<a class="Popup-close" href="#">Close</a>
+					</div>
 				</div>
 			</div>
 
@@ -93,14 +105,6 @@
 							</div>
 						{% endfor %}
 					</div>
-
-					<a class="Popup-close" href="#">Close</a>
-				</div>
-			</div>
-
-			<div class="Popup Popup--shows">
-				<div class="Popup-content Popup-content--shows">
-					<a href="http://www.bandsintown.com/wildhart" class="bit-widget-initializer" data-artist="wildhart" data-prefix="fbjs">wildhart Tour Dates</a>
 
 					<a class="Popup-close" href="#">Close</a>
 				</div>

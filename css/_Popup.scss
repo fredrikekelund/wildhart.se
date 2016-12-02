@@ -13,40 +13,34 @@
 	z-index: 10;
 
 	@media (max-height: $short) {
-		background-color: $content-container-bg-color;
-		background-image: $content-container-bg-gradient;
+		background-color: $content-bg-color;
+		background-image: $content-bg-gradient;
 		height: 100%;
 		top: 0;
 		transform: none;
 	}
+	@media (max-height: 1100px) {
+		transform: translateY(-50%);
+	}
 }
 .Popup-content {
-	border: $border-width solid $border-color;
-	display: inline-block;
+	background-color: $content-bg-color;
+	background-image: $content-bg-gradient;
+	border: 2px solid $popup-border-color;
+	box-shadow: 0 0 10em 5em $popup-shadow-color;
 	margin: 0 auto;
+	max-height: 30em;
+	max-width: 100%;
 	overflow: auto;
-	padding: 2em;
 	padding-bottom: 0;
+	padding: 2em;
 	transform: translateY(10em);
 	transition: transform $transition-duration $transition-easing;
-
-	@media (max-height: 30em) {
-		max-height: 100%;
-	}
-
-	@media (min-height: $short) {
-		background-color: $content-container-bg-color;
-		background-image: $content-container-bg-gradient;
-		max-height: 30em;
-	}
-
-	@media (max-width: $narrow) {
-		max-width: 100%;
-	}
 
 	@media (max-height: $short) {
 		border-width: 0;
 		height: 100%;
+		max-height: none;
 		padding-top: 11em;
 	}
 
@@ -64,29 +58,39 @@
 }
 .Popup-content--shows,
 .Popup-content--contact {
-	max-width: 30em;
-}
-.Popup-content--contact {
 	@include flexbox-container;
 	@include flex-direction(column);
-	min-height: 18em;
-	max-width: 100%;
+	max-width: 30em;
+	min-height: 20em;
+	padding-bottom: 0;
 	width: 28em;
 }
 .Popup-content--press,
 .Popup-content--images {
 	text-align: center;
-	width: 40em;
+	max-width: 40em;
 
 	@media (max-height: $short) {
 		padding-top: 6em;
+	}
+	@media (max-height: $short) and (max-width: $narrower) {
+		padding-top: 4em;
+	}
+}
+.Popup-content--shows,
+.Popup-content--contact,
+.Popup-content--press,
+.Popup-content--images {
+	@media (max-height: $short) {
+		max-width: none;
 	}
 }
 .Popup-textWrapper {
 	@include flex;
 	@include flexbox-container;
 	@include flex-direction(column);
-
+}
+.Popup-textWrapper--center {
 	@media (min-height: $short) {
 		@include justify-content(center);
 	}
@@ -95,14 +99,18 @@
 	margin-bottom: 2em;
 
 	& + & {
-		border-top: 1px solid mix(black, fade-in($content-container-bg-color, 1), 20%);
+		border-top: 1px solid $section-border-color;
 		padding-top: 2em;
 	}
 }
 .Popup-heading {
-	font-size: 2em;
+	font-size: $font-size-big;
 	line-height: 1;
-	margin-bottom: 1em;
+	margin-bottom: #{2em / $font-size-big}em;
+
+	@media (max-width: $narrower) {
+		font-size: $font-size-big * 0.725;
+	}
 }
 .Popup-content p {
 	font-family: $font-family-alternate;
@@ -112,10 +120,7 @@
 	text-align: center;
 
 	a {
-		background-image: linear-gradient(to bottom, $link-border-color, $link-border-color);
-		background-repeat: no-repeat;
-		background-size: 100% 1px;
-		background-position: center 1em;
+		border-bottom: 1px solid $link-border-color;
 		transition: opacity .2s linear;
 
 		&:hover {
@@ -138,14 +143,14 @@
 	transition-timing-function: linear;
 
 	&:hover {
-		color: desaturate(darken($bg-color, 45%), 70%);
+		color: desaturate(darken($body-bg-color, 45%), 70%);
 		text-shadow:
 			0 0 1em white,
-			0 0 1em $bg-color,
+			0 0 1em $body-bg-color,
 			0 0 1em white,
-			0 0 1em $bg-color,
+			0 0 1em $body-bg-color,
 			0 0 1em white,
-			0 0 1em $bg-color;
+			0 0 1em $body-bg-color;
 	}
 
 	&:before {
@@ -156,6 +161,8 @@
 }
 .Popup-images {
 	overflow: hidden;
+	margin: 0 auto;
+	max-width: 40em;
 }
 .Popup-imageWrapper {
 	float: left;
@@ -171,7 +178,7 @@
 .Popup-imageLink {
 	background-size: cover;
 	background-position: center;
-	border: $border-width solid $border-color;
+	border: 2px solid $popup-border-color;
 	display: block;
 	height: 0;
 	margin: .5em;
@@ -199,8 +206,11 @@
 	padding-top: 1em !important;
 }
 #bit-events table a {
-	background-image: linear-gradient(to bottom, $link-border-color, $link-border-color);
-	background-repeat: no-repeat;
-	background-size: 100% 1px;
-	background-position: center 1em;
+	border-bottom: 1px solid $link-border-color;
+}
+#bit-events table {
+	border-width: 0 !important;
+}
+#bit-events .bit-events td {
+	border-color: $section-border-color !important;
 }

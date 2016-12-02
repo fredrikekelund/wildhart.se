@@ -9,18 +9,11 @@
 	z-index: 90;
 }
 .SiteNav-link {
-	$font-size: 2em;
-	$text-shadow: unquote("#{nth($heading-text-shadow-offsets, 1)} 0 #{nth($heading-text-shadow-colors, 1)}");
-
-	@for $i from 2 to (length($heading-text-shadow-colors) + 1) {
-		$text-shadow: append($text-shadow, unquote("#{nth($heading-text-shadow-offsets, $i)} 0 #{nth($heading-text-shadow-colors, $i)}"), comma);
-	}
-
 	border-bottom: 0;
 	color: black;
 	display: block;
-	font-size: $font-size;
-	line-height: $nav-height / $font-size;
+	font-size: $font-size-big;
+	line-height: $nav-height / $font-size-big;
 	outline: 0;
 	padding: .1em 0;
 	text-align: center;
@@ -29,14 +22,14 @@
 	transition-timing-function: linear;
 
 	&:hover {
-		color: $bg-color;
+		color: $body-bg-color;
 		text-shadow:
 			0 0 0.75em white,
-			0 0 0.75em $bg-color,
+			0 0 0.75em $body-bg-color,
 			0 0 0.75em white,
-			0 0 0.75em $bg-color,
+			0 0 0.75em $body-bg-color,
 			0 0 0.75em white,
-			0 0 0.75em $bg-color;
+			0 0 0.75em $body-bg-color;
 	}
 
 	@media (min-width: $narrower + 1px) {
@@ -44,15 +37,8 @@
 	}
 
 	@media (max-width: $narrower) {
-		font-size: $font-size * 0.85;
+		font-size: $font-size-big * 0.725;
 		line-height: inherit;
 		width: 50%;
-	}
-}
-.SiteNav-link--images {
-	border-width: $border-width $border-width $border-width/2 $border-width;
-
-	@media (max-width: $narrower) {
-		border-right-width: 0;
 	}
 }
