@@ -12,15 +12,16 @@
 	width: 100%;
 	z-index: 10;
 
+	@media (max-height: 1100px) {
+		transform: translateY(-50%);
+	}
+
 	@media (max-height: $short) {
 		background-color: $content-bg-color;
 		background-image: $content-bg-gradient;
 		height: 100%;
 		top: 0;
 		transform: none;
-	}
-	@media (max-height: 1100px) {
-		transform: translateY(-50%);
 	}
 }
 .Popup-content {
