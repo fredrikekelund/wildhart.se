@@ -264,13 +264,13 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 	}
 }
 .OrderLink-background {
-	$order-link-bg-color: mix(yellow, $content-bg-color);
+	$order-link-bg-color: hsl(51, 100%, 66%);
 	$padding: 1em;
 
 	background-color: $order-link-bg-color;
 	border-radius: 10em;
 	bottom: $padding;
-	box-shadow: 0 0 5em 5em $order-link-bg-color;
+	box-shadow: 0 0 7em 7em $order-link-bg-color;
 	left: $padding;
 	opacity: 0;
 	position: absolute;
@@ -283,7 +283,7 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 	visibility: hidden;
 }
 .OrderLink-image {
-	$dimensions: 12em;
+	$dimensions: 14em;
 
 	animation-name: glitch;
 	animation-duration: 15s;
