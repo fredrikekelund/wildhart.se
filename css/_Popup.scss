@@ -65,7 +65,6 @@
 	@include flex-direction(column);
 	max-width: 30em;
 	min-height: 20em;
-	width: 28em;
 }
 .Popup-content--press,
 .Popup-content--images {
@@ -91,6 +90,8 @@
 	@include flex;
 	@include flexbox-container;
 	@include flex-direction(column);
+	margin: 0 auto;
+	max-width: 30em;
 }
 .Popup-textWrapper--center {
 	@media (min-height: $short) {
