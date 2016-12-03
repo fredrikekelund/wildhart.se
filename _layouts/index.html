@@ -119,15 +119,25 @@
 
 		<div class="Popup Popup--images">
 			<div class="Popup-content Popup-content--images">
-				<div class="Popup-images">
-					{% for image in site.data.images %}
-						<div class="Popup-imageWrapper">
-							<a class="Popup-imageLink" href="{{ image.url }}" style="background-image: url('{{ image.thumburl }}')"></a>
+
+				{% for section in site.data.images %}
+					<div class="Popup-section">
+						<h2 class="Popup-heading">
+							{{ section.title }}
+						</h2>
+
+						<div class="Popup-images">
+							{% for image in section.images %}
+								<div class="Popup-imageWrapper">
+									<a class="Popup-imageLink" href="{{ image.url }}" style="background-image: url('{{ image.thumburl }}')"></a>
+								</div>
+							{% endfor %}
 						</div>
-					{% endfor %}
-				</div>
+					</div>
+				{% endfor %}
 
 				<a class="Popup-close" href="#">Close</a>
+
 			</div>
 		</div>
 

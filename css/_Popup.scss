@@ -77,7 +77,7 @@
 		padding-top: 6em;
 	}
 	@media (max-height: $short) and (max-width: $narrower) {
-		padding-top: 4em;
+		padding-top: 5em;
 	}
 }
 .Popup-content--shows,
@@ -99,10 +99,9 @@
 	}
 }
 .Popup-section {
-	margin-bottom: 2em;
-
 	& + & {
 		border-top: 1px solid $section-border-color;
+		margin-top: 2em;
 		padding-top: 2em;
 	}
 }
@@ -177,6 +176,11 @@
 	&:nth-child(even) .Popup-imageLink {
 		margin-right: 0;
 	}
+
+	@media (max-width: $narrower) {
+		float: none;
+		width: 100%;
+	}
 }
 .Popup-imageLink {
 	background-size: cover;
@@ -189,6 +193,10 @@
 
 	&:nth-child(even) {
 		padding-left: 0;
+	}
+
+	@media (max-width: $narrower) {
+		margin: 0 0 ($font-size-big / 4) 0;
 	}
 }
 

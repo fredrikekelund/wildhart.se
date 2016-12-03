@@ -46,8 +46,11 @@
 			0 0 0.75em $body-bg-color;
 	}
 
-	@media (max-width: $narrow) {
+	@media (max-width: $wide) {
 		font-size: $font-size-big * 0.725;
+	}
+
+	@media (max-width: $narrow) {
 		line-height: inherit;
 		width: 50%;
 	}
