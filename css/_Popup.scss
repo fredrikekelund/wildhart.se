@@ -28,7 +28,9 @@
 	background-color: $content-bg-color;
 	background-image: $content-bg-gradient;
 	border: 2px solid $popup-border-color;
-	box-shadow: 0 0 10em 5em $popup-shadow-color;
+	box-shadow:
+		0 0 8em 8em lighten($content-bg-color-alternate, 14%),
+		0 0 10em 8em $popup-shadow-color;
 	margin: 0 auto;
 	max-height: 30em;
 	max-width: 100%;

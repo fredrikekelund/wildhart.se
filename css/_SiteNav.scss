@@ -1,12 +1,26 @@
 .SiteNav {
-	@include flexbox-container;
 	bottom: 0.5em;
-	flex-wrap: wrap;
 	position: absolute;
 	transition-duration: $transition-duration, 0;
 	transition-property: opacity, visibility;
 	width: 100%;
 	z-index: 90;
+}
+.SiteNav-content {
+	@include flexbox-container;
+	@include justify-content(space-between);
+	flex-wrap: wrap;
+	margin: 0 auto;
+	max-width: $page-max-width;
+	padding: 0 $font-size-big * 2;
+
+	@media (max-width: $narrow) {
+		padding: 0 $font-size-big / 2;
+	}
+
+	@media (max-width: $narrower) {
+		padding: 0;
+	}
 }
 .SiteNav-link {
 	border-bottom: 0;
@@ -22,7 +36,7 @@
 	transition-timing-function: linear;
 
 	&:hover {
-		color: $body-bg-color;
+		color: white;
 		text-shadow:
 			0 0 0.75em white,
 			0 0 0.75em $body-bg-color,
@@ -32,11 +46,7 @@
 			0 0 0.75em $body-bg-color;
 	}
 
-	@media (min-width: $narrower + 1px) {
-		@include flex;
-	}
-
-	@media (max-width: $narrower) {
+	@media (max-width: $narrow) {
 		font-size: $font-size-big * 0.725;
 		line-height: inherit;
 		width: 50%;

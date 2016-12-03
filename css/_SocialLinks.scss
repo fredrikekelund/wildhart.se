@@ -1,21 +1,47 @@
 $height-modifier: 0.65;
+$social-link-font-size: 2em;
 
 .SocialLinks {
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 100%;
+	z-index: 90;
+}
+.SocialLinks-container {
 	@include flexbox-container;
-	padding-top: 2em;
+	@include justify-content(flex-end);
+	margin: 0 auto;
+	max-width: $page-max-width;
+	padding-left: $font-size-big;
+	padding-right: $font-size-big;
+	padding-top: $social-link-font-size;
+
+	@media (max-width: $narrow) {
+		padding-left: $font-size-big / 2;
+		padding-right: $font-size-big / 2;
+	}
+
+	@media (max-width: $narrower) {
+		padding-left: 0;
+		padding-right: 0;
+	}
 
 	@media (max-width: $narrow) {
 		height: $nav-height / 1.8;
 		padding-top: 1em;
 	}
 }
-.SocialLinks-wrapper {
-	@include flex;
+.SocialLinks-linkWrapper {
+	max-width: 6em;
+	width: 25%;
 	text-align: center;
+
+	@media (max-width: $narrow) {
+		max-width: none;
+	}
 }
 .SocialLinks-link {
-	$font-size: 2.5em;
-
 	background: url("/img/icons/sprite.png") top left no-repeat;
 	background-size: 100% auto;
 	border-bottom: 0;
@@ -38,10 +64,6 @@ $height-modifier: 0.65;
 
 	@media (max-height: $narrow) {
 		font-size: .45em;
-	}
-
-	@media (max-width: $narrower) {
-		font-size: .375em;
 	}
 
 	.webp & {

@@ -13,6 +13,7 @@ $narrower: 475px;
 $short: 700px;
 
 $nav-height: 4em;
+$page-max-width: 1300px;
 
 $background-image-jpg: "/img/wildhart.large-2.jpg";
 $background-image-webp: "/img/wildhart.large-2.webp";
@@ -24,15 +25,15 @@ $font-size-big: 2.75em;
 
 $text-color: black;
 $link-border-color: fade-out($text-color, .5);
-$body-bg-color: hsl(58, 78%, 96%);
+$body-bg-color: hsl(356, 75%, 87%);
 
 $popup-shadow-color: hsl(355, 68%, 98%);
 $popup-border-color: fade-out(white, .25);
-$site-bg-gradient-color: hsla(0, 0%, 10%, .5);
+$site-bg-gradient-color: hsla(0, 0%, 10%, .35);
 
-$content-bg-color-alternate: hsl(32, 89%, 76%);
-$content-bg-color: mix($content-bg-color-alternate, hsl(59, 87%, 70%), 72%);
-$content-bg-gradient: radial-gradient(ellipse at 30% 40% , $content-bg-color, $content-bg-color-alternate);
+$content-bg-color: hsl(37, 92%, 84%);
+$content-bg-color-alternate: hsl(357, 93%, 84%);
+$content-bg-gradient: radial-gradient(ellipse at 30% 40% , $content-bg-color 10%, $content-bg-color-alternate);
 $section-border-color: fade-out(darken($content-bg-color, 50%), 0.65);
 
 $transition-duration: .45s;
@@ -231,17 +232,6 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 			linear-gradient(to top, $site-bg-gradient-color, fade-out($site-bg-gradient-color, 1) 30%),
 			linear-gradient(to bottom, fade-out($site-bg-gradient-color, 0.2), fade-out($site-bg-gradient-color, 1) 20%),
 			url($background-image-webp);
-	}
-}
-.Header {
-	position: absolute;
-	right: 0;
-	top: 0;
-	width: 100%;
-	z-index: 90;
-
-	@media (min-width: $narrow) {
-		width: 23em;
 	}
 }
 
