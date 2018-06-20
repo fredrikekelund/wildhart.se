@@ -3,10 +3,10 @@
   images:
     - title: Wildhart Press 01
       url: /img/press/wildhart-press-01.jpg
-      thumburl: /img/press/thumbs/wildhart-press-thumb-01.jpg
+      thumburl: /img/live/thumbs/wildhart-press-thumb-01.jpg
     - title: Wildhart Press 02
       url: /img/press/wildhart-press-02.jpg
-      thumburl: /img/press/thumbs/wildhart-press-thumb-02.jpg
+      thumburl: /img/live/thumbs/wildhart-press-thumb-02.jpg
  
 -
   title: Live
