@@ -167,12 +167,6 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 		}
 	}
 
-	.OrderLink {
-		opacity: 0;
-		transition-delay: 0s, $transition-duration / 2;
-		visibility: hidden;
-	}
-
 	.WildhartTitles-title {
 		animation: fade $transition-duration linear 0s 1;
 		bottom: 55%;
@@ -232,74 +226,6 @@ $transition-easing: cubic-bezier(.1, 1, .75, 1);
 			linear-gradient(to top, $site-bg-gradient-color, fade-out($site-bg-gradient-color, 1) 30%),
 			linear-gradient(to bottom, fade-out($site-bg-gradient-color, 0.2), fade-out($site-bg-gradient-color, 1) 20%),
 			url($background-image-webp);
-	}
-}
-
-.OrderLink {
-	border: 0;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	position: absolute;
-	top: 68%;
-	transition-duration: $transition-duration / 2, 0s;
-	transition-property: opacity, visibility;
-	transition-timing-function: linear;
-
-	&:hover {
-		.OrderLink-background {
-			opacity: 1;
-			transition-delay: 0s;
-			visibility: visible;
-		}
-		.OrderLink-image {
-			animation: none;
-		}
-	}
-
-	@media (max-width: $narrow) {
-		top: 64%;
-	}
-	@media (max-height: $narrow + 100px) {
-		top: 50%;
-	}
-}
-.OrderLink-background {
-	$order-link-bg-color: hsl(51, 100%, 66%);
-	$padding: 1em;
-
-	background-color: $order-link-bg-color;
-	border-radius: 10em;
-	bottom: $padding;
-	box-shadow: 0 0 7em 7em $order-link-bg-color;
-	left: $padding;
-	opacity: 0;
-	position: absolute;
-	right: $padding;
-	top: $padding;
-	transition-delay: 0s, $transition-duration;
-	transition-duration: $transition-duration / 2, 0s;
-	transition-property: opacity, visibility;
-	transition-timing-function: linear;
-	visibility: hidden;
-}
-.OrderLink-image {
-	$dimensions: 14em;
-
-	animation-name: glitch;
-	animation-duration: 15s;
-	animation-timing-function: linear;
-	animation-iteration-count: infinite;
-	background-image: url($order-img);
-	background-repeat: no-repeat;
-	background-size: contain;
-	height: $dimensions;
-	position: relative;
-	width: $dimensions;
-	z-index: 1;
-
-	@media (max-width: $narrow) {
-		height: $dimensions * 0.8;
-		width: $dimensions * 0.8;
 	}
 }
 
