@@ -1,8 +1,6 @@
 .SiteNav {
 	bottom: 0.5em;
 	position: absolute;
-	transition-duration: $transition-duration, 0;
-	transition-property: opacity, visibility;
 	width: 100%;
 	z-index: 90;
 }
@@ -30,21 +28,8 @@
 	line-height: $nav-height / $font-size-big;
 	outline: 0;
 	padding: .1em 0;
-	text-align: center;	transition-property: color, text-shadow;
-	transition-duration: $transition-duration / 2;
-	transition-timing-function: linear;
-
-	&:hover {
-		color: white;
-		text-shadow:
-			0 0 0.75em white,
-			0 0 0.75em $body-bg-color,
-			0 0 0.75em white,
-			0 0 0.75em $body-bg-color,
-			0 0 0.75em white,
-			0 0 0.75em $body-bg-color;
 	}
-
+}
 	@media (max-width: $wide) {
 		font-size: $font-size-big * 0.725;
 	}
