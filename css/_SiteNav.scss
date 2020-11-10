@@ -34,16 +34,7 @@
 	transition-property: color, text-shadow;
 	transition-duration: $transition-duration / 2;
 	transition-timing-function: linear;
-
-	&:hover {
-		color: white;
-		text-shadow:
-			0 0 0.75em white,
-			0 0 0.75em $body-bg-color,
-			0 0 0.75em white,
-			0 0 0.75em $body-bg-color,
-			0 0 0.75em white,
-			0 0 0.75em $body-bg-color;
+	
 	}
 
 	@media (max-width: $wide) {
